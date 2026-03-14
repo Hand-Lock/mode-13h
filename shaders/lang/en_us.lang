@@ -1,0 +1,86 @@
+# DOSGL-13h — Iris/Oculus language file
+
+# ===== Main Screen =====
+
+option.DOS_SCALE=Pixel Scale
+option.DOS_SCALE.comment=Downscale factor for the final image. At 1280x800 with scale 4, output is 320x200 (Mode 13h).
+
+option.AMBIENT_FLOOR=Ambient Floor
+option.AMBIENT_FLOOR.comment=Minimum lightmap brightness. Prevents pure black in unlit areas.
+
+option.DOS_LIGHT_STEPS=Light Steps
+option.DOS_LIGHT_STEPS.comment=Number of discrete light levels. Simulates banded colormap lighting as in DOS-era engines. 0 disables quantization.
+
+# ===== Color Reduction =====
+
+screen.COLOR=Color Reduction
+screen.COLOR.comment=Palette mode and color grading bypass.
+
+option.DOS_PALETTE_256=Palette Mode
+option.DOS_PALETTE_256.comment=Selects the color reduction method applied in the final pass.
+value.DOS_PALETTE_256.0=216 Colors (6x6x6)
+value.DOS_PALETTE_256.1=256 Colors (RGB332)
+
+option.DOS_PALETTE_BYPASS=Bypass
+option.DOS_PALETTE_BYPASS.comment=Disables color grading and palette quantization entirely. Useful for debugging or screenshots.
+value.DOS_PALETTE_BYPASS.0=OFF
+value.DOS_PALETTE_BYPASS.1=ON
+
+# ===== Affine Mapping =====
+
+screen.AFFINE=Affine Mapping
+screen.AFFINE.comment=Affine (non-perspective-correct) texture warping, as seen in PS1 and DOS software renderers.
+
+option.DOS_AFFINE_ENABLE=Affine Mapping
+option.DOS_AFFINE_ENABLE.comment=Enables affine texture distortion on world geometry.
+value.DOS_AFFINE_ENABLE.0=OFF
+value.DOS_AFFINE_ENABLE.1=ON
+
+option.DOS_AFFINE_NEAR=Near Distance
+option.DOS_AFFINE_NEAR.comment=Surfaces closer than this distance blend toward perspective-correct mapping.
+
+option.DOS_AFFINE_RANGE=Fade Range
+option.DOS_AFFINE_RANGE.comment=Distance over which the blend from perspective-correct to full affine occurs.
+
+# ===== Fog Tuning =====
+
+screen.FOG=Fog Tuning
+screen.FOG.comment=Adjusts vanilla fog distances and density for a thicker, moodier atmosphere.
+
+option.FOG_TUNE_ENABLE=Fog Tuning
+option.FOG_TUNE_ENABLE.comment=Enables fog parameter overrides below. Vanilla fog behavior is preserved when off.
+value.FOG_TUNE_ENABLE.0=OFF
+value.FOG_TUNE_ENABLE.1=ON
+
+option.FOG_START_SCALE=Start Scale
+option.FOG_START_SCALE.comment=Multiplier for the fog start distance.
+
+option.FOG_START_ADD=Start Offset
+option.FOG_START_ADD.comment=Value added to the fog start distance, in blocks.
+
+option.FOG_END_SCALE=End Scale
+option.FOG_END_SCALE.comment=Multiplier for the fog end distance.
+
+option.FOG_END_ADD=End Offset
+option.FOG_END_ADD.comment=Value added to the fog end distance, in blocks.
+
+option.FOG_DENSITY_SCALE=Density Scale
+option.FOG_DENSITY_SCALE.comment=Multiplier for EXP/EXP2 fog density.
+
+option.FOG_MIN_RANGE=Minimum Range
+option.FOG_MIN_RANGE.comment=Safety floor for the linear fog range when start and end are too close together.
+
+# ===== Add-ons =====
+
+screen.ADDONS=Add-ons
+screen.ADDONS.comment=Optional features that require companion mods or resource packs.
+
+option.FLATTER_SIGNS=Flatter Signs
+option.FLATTER_SIGNS.comment=Billboards standing and hanging signs as flat sprites. §eNeeds the Flatter Signs add-on!
+value.FLATTER_SIGNS.0=OFF
+value.FLATTER_SIGNS.1=ON
+
+option.BILLY_BOARDING=Billy Boarding
+option.BILLY_BOARDING.comment=Billboards cakes, flower pots, candles, sea pickles, brewing stands, anvils, bells, cacti, crops, fire, and soul fire. §eNeeds the Billy Boarding add-on!
+value.BILLY_BOARDING.0=OFF
+value.BILLY_BOARDING.1=ON
