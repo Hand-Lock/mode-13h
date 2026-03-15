@@ -4,6 +4,8 @@
 
 *An **Iris** shader pack for Minecraft that recreates the look of late-90s **MS-DOS** 3D graphics with deliberate retro accuracy.*
 
+![A screenshot of a Minecraft daytime scene with the shader pack.](https://cdn.modrinth.com/data/cached_images/7f88226fae022bc760918a14c467a6762b129cd6.png)
+
 **Mode 13h: MS-DOSify!** is not just a generic “pixelation” shader. It aims to reproduce the actual visual limitations and quirks that gave old DOS-era 3D games their unmistakable look: low resolution, affine texture warping, limited color depth, stepped lighting, billboarded sprites, and carefully tuned fog.
 
 It has currently only been **tested on Minecraft `1.20.1`**, but it **should also work on other versions**.
@@ -17,6 +19,8 @@ It has currently only been **tested on Minecraft `1.20.1`**, but it **should als
 A lot of “retro” shaders stop at chunky pixels and call it a day.
 
 **Mode 13h** goes further. It tries to recreate the specific rendering artifacts that defined old DOS-era 3D, including the quirks modern graphics usually try to hide or eliminate. The goal is not just to look old — it is to feel like an actual late-90s PC pushing textured 3D slightly beyond its comfort zone.
+
+![A screenshot of a Minecraft night-time scene using the shader pack.](https://cdn.modrinth.com/data/cached_images/8b56f91dff28ec8312f6133e71f8c0ba1f3aa826.png)
 
 ## ✨ Features
 
