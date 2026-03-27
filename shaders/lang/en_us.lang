@@ -70,6 +70,24 @@ option.FOG_DENSITY_SCALE.comment=Multiplier for EXP/EXP2 fog density.
 option.FOG_MIN_RANGE=Minimum Range
 option.FOG_MIN_RANGE.comment=Safety floor for the linear fog range when start and end are too close together.
 
+# ===== Hands =====
+
+screen.HANDS=Hands & Held Items
+screen.HANDS.comment=First-person hands and held item rendering tweaks for a flatter DOS sprite look.
+
+option.HAND_FLATTEN=Flat Viewmodel Sprites
+option.HAND_FLATTEN.comment=Removes lightmap shading from first-person hands and held items so they read more like painted 2D sprites.
+value.HAND_FLATTEN.0=OFF
+value.HAND_FLATTEN.1=ON
+
+option.HAND_DITHER=Viewmodel Dithering
+option.HAND_DITHER.comment=Adds subtle ordered dithering only to first-person hands and held items before the final palette pass.
+value.HAND_DITHER.0=OFF
+value.HAND_DITHER.1=ON
+
+option.HAND_DITHER_STRENGTH=Dither Strength
+option.HAND_DITHER_STRENGTH.comment=Strength of the ordered dither pattern on first-person hands and held items.
+
 # ===== Add-ons =====
 
 screen.ADDONS=Add-ons
