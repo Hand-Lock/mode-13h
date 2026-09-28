@@ -40,38 +40,38 @@ real hardware did.
 
 - **Resolution.** `final` point-samples one texel per `DOS_SCALE` cell
   (1–8, default 4).
-- **Palette.** RGB332 quantized in sqrt space (256 colors, default) or a
-  6×6×6 cube (216 colors). A bypass exists for debugging.
+- **Palette** (`DOS_PALETTE`). A fixed 256-color palette looked up through a
+  32³ OKLab nearest-color LUT (`textures/palette.dat`): the ramp palette
+  (16 Minecraft hues × 16 shades, default) or the stock VGA palette. RGB332
+  and a 6×6×6 cube are computed; 0 turns the palette off. ADRs 0006, 0010.
+- **Colormap lighting** (`DOS_COLORMAP`, default on). Textures snap to the
+  palette before lighting, so shading steps down each color's ramp like
+  Doom/Quake colormaps. ADR 0011.
 - **Lighting.** Vanilla lightmap with an ambient floor (`AMBIENT_FLOOR`) and
   luminance quantized to `DOS_LIGHT_STEPS` (default 16) while keeping tint.
   `oldLighting=true` keeps vanilla face shading.
-- **Affine texture mapping.** Terrain, water, entities and generic textured
-  geometry blend from perspective-correct to affine UVs over distance
-  (`DOS_AFFINE_NEAR`, `DOS_AFFINE_RANGE`). Billboards stay perspective-correct.
-- **Fog.** Vanilla fog curves and shapes, with scale/offset tuning; the default
-  starts fog at half the vanilla distance.
+- **Texture mapping** (`DOS_TEXMAP`). Quake-style subdivision by default:
+  perspective-correct every `DOS_SPAN` output pixels (default 16), linear in
+  between. Full affine (faded in over the nearest 1.5 blocks) and
+  perspective-correct are options. Billboards and hands stay
+  perspective-correct. ADR 0007.
+- **Texture LOD.** Mip selection is biased by `log2(DOS_SCALE)`, so textures
+  are filtered for the 320×200 output instead of shimmering. ADR 0009.
+- **Fog.** Vanilla fog curves and shapes, scaled by `FOG_START_SCALE`,
+  `FOG_END_SCALE` and `FOG_DENSITY_SCALE`; the default starts fog at half the
+  vanilla distance.
 - **Billboards.** Cross plants, cave vines, hanging propagules, amethyst,
   chains, torches, bamboo and lanterns are rewritten in the terrain vertex
   shader into single camera-facing quads. Signs and Billy-Boarding blocks are
   opt-in.
-- **Hands.** Optional unlit "painted sprite" look and a 4×4 ordered dither at
-  macro-pixel scale.
+- **Hands.** Optional unlit "painted sprite" look (`HAND_FLATTEN`) and a 4×4
+  ordered dither at macro-pixel scale (`HAND_DITHER`, strength, 0 = off).
 - **Water.** Darker and more opaque in low light.
 
 ## Roadmap
 
 Each item gets an ADR before it is implemented.
 
-- **R1 — Fixed 256-color palette.** A fixed VGA palette through a LUT becomes
-  the default; RGB332 and 6×6×6 stay as options. ADR 0006.
-- **R2 — Colormap lighting.** Light bands index along the palette's ramps
-  instead of scaling RGB, like Doom/Quake colormaps. Depends on R1.
-- **R3 — Quake-style perspective subdivision.** Perspective-correct every N
-  screen pixels, affine in between, as the default texture mapping. Full
-  affine stays as an option. ADR 0007.
-- **R4 — Texture LOD matched to 320×200.** Bias mip selection by
-  `log2(DOS_SCALE)` so textures are filtered for the sample rate that is
-  actually shown, instead of shimmering.
 - **R5 — Extended billboarding** through the Billy-Boarding resource pack.
 - **R6 — Flatter Signs on 1.21.1+** (separate repo, `Hand-Lock/flatter-signs`).
 - **R7 — Optional bespoke skybox** resource pack.

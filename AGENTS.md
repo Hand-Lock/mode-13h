@@ -28,7 +28,7 @@ shaders/
   block.properties      block → mc_Entity ID map
   lang/en_us.lang       menu labels and tooltips
   lib/vertex.glsl       shared varyings; emitVertex() when VSH is defined
-  lib/common.glsl       gtexture/lightmap samplers, applyLightmap()
+  lib/common.glsl       albedo() (LOD bias, colormap), applyLightmap()
   lib/fog.glsl          vanilla-compatible fog, applyFog(rgb, viewPos)
   lib/texmap.glsl       texmap(): perspective / subdivided / affine UVs
   lib/palette.glsl      palettize(): the DOS_PALETTE color reduction
@@ -62,6 +62,10 @@ skytextured, clouds, spidereyes,
 skybasic, line                                 → basic
 ```
 
+The pack ships basic, textured, terrain, water, entities, hand, clouds,
+skytextured and spidereyes; everything else, particles and rain included,
+falls through to one of them.
+
 Never add a program whose code equals its fallback. Add one only when it must
 behave differently.
 
@@ -74,7 +78,8 @@ Four places, kept in sync (`tools/check.sh` verifies 1–3):
    if it is numeric.
 3. `lang/en_us.lang`: `option.NAME=`, `option.NAME.comment=`, and
    `value.NAME.<v>=` for on/off or enum values.
-4. The code that reads it, inside `#if`.
+4. The code that reads it: inside `#if`, or arithmetically for decimal
+   options (`#if` can't compare floats).
 
 ## Billboarded blocks
 

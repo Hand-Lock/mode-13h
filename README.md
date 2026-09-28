@@ -6,7 +6,7 @@
 
 ![A screenshot of a Minecraft daytime scene with the shader pack.](https://cdn.modrinth.com/data/cached_images/7f88226fae022bc760918a14c467a6762b129cd6.png)
 
-**Mode 13h: MS-DOSify!** is not just a generic “pixelation” shader. It aims to reproduce the actual visual limitations and quirks that gave old DOS-era 3D games their unmistakable look: low resolution, affine texture warping, limited color depth, stepped lighting, billboarded sprites, and carefully tuned fog.
+**Mode 13h: MS-DOSify!** is not just a generic “pixelation” shader. It aims to reproduce the actual visual limitations and quirks that gave old DOS-era 3D games their unmistakable look: low resolution, wobbly software texture mapping, a fixed 256-color palette, colormap lighting, billboarded sprites, and carefully tuned fog.
 
 It supports **Minecraft `1.20.1` and `1.21.1`** with **Iris** or **Oculus**; every release is tested on both. Newer versions are **best-effort**.
 
@@ -29,20 +29,23 @@ A lot of “retro” shaders stop at chunky pixels and call it a day.
 - The image is downscaled to a **Mode 13h-style `320 x 200`** internal resolution.
 - This gives the shader pack the crunchy image structure typical of classic DOS graphics.
 
-### 🧱 Affine texture mapping
+- Textures pick their mipmaps for that `320 x 200` image, so distant surfaces don't shimmer.
 
-- Textures use **affine mapping** instead of perspective-correct mapping.
-- This recreates the classic **texture wobble and warping** seen in older software-rendered 3D games.
+### 🧱 Quake-style texture mapping
 
-### 🎨 Retro palette reduction
+- Like **Quake**, textures are perspective-correct only every **16 pixels** and linear in between, giving the subtle **texture wobble** of software-rendered 3D.
+- Want the full **PlayStation-style warping**? Switch to **affine** mapping. Prefer it clean? Perspective-correct is there too.
 
-- Colors are quantized to a **256-color** style output.
-- An optional **`6 x 6 x 6`** palette provides a more limited **216-color** look.
+### 🎨 A real 256-color palette
 
-### 💡 Stepped lighting
+- Every pixel is drawn from a **fixed 256-color palette**, like a DOS game's own.
+- The default **ramp** palette has 16 Minecraft hues (stone, dirt, grass, water, lava, gold…) in 16 shades each.
+- Prefer the classic? Pick the **stock VGA palette**, or the computed **RGB332** and **`6 x 6 x 6`** palettes.
 
-- Lighting is **quantized** into configurable brightness steps.
-- Setting it to **16** steps gives something closer to vanilla Minecraft’s light progression while keeping the retro feel.
+### 💡 Colormap lighting
+
+- Textures only use palette colors, and shadows **step down each color's ramp** instead of dimming smoothly — just like the colormaps of **Doom** and **Quake**.
+- Light is **quantized** into configurable brightness steps; **16** matches vanilla Minecraft’s light levels.
 
 ### 🌫️ Tuned fog
 
@@ -60,12 +63,13 @@ The shader includes a **configuration menu** with several options so you can fin
 
 You can adjust things such as:
 
-- **Fog tuning parameters**
-- **Affine mapping parameters**
-- **Color reduction mode**, including switching between **256-color** and **216-color**
+- **Pixel scale** (resolution reduction)
+- **Palette**: ramp, stock VGA, RGB332, `6 x 6 x 6` or off
+- **Colormap lighting**, **light steps** and **ambient floor**
+- **Texture mapping**: subdivided, affine or perspective-correct, and the span width
+- **Fog** start, end and density
+- **Hands**: flat sprite look and dithering strength
 - **Add-on compatibility toggles**, which can be enabled or disabled individually
-- **Resolution reduction**
-- And other settings for dialing in the exact retro look you want
 
 ## 🔧 Technical Notes
 
