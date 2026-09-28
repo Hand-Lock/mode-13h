@@ -100,12 +100,14 @@ For every task:
    end with the co-author trailer your harness asks for.
 6. `git push`.
 
-Then ask for visual verification if the change is visible.
+Don't ask for screenshots or wait for an in-game check. The user tests on
+their own and tells you when something is wrong.
 
 ## Visual verification
 
-You can't see the game. Ask the user to reload shaders in-game (default `R`
-in the shader screen, or F3+R) and press F2, then read the newest screenshot:
+Only when the user reports a problem, or asks you to look. You can't see the
+game: ask them to reload shaders in-game (default `R` in the shader screen, or
+F3+R) and press F2, then read the newest screenshot:
 
 ```sh
 sh -c '. ./.local.env; IFS=:; for d in $MC_DIRS; do
@@ -130,8 +132,8 @@ Only when the user says **release**. Never on your own initiative.
 1. Pick the SemVer bump: patch = fixes and block-list additions; minor = new
    features or visible look changes; major = removed/renamed options or a
    changed add-on ID contract.
-2. Ask whether both 1.20.1 and 1.21.1 were tested in-game if you haven't seen
-   it happen.
+2. Ask whether both 1.20.1 and 1.21.1 were tested in-game, unless the user
+   already said so. Their word is enough.
 3. In `CHANGELOG.md`, rename `## [Unreleased]` to `## [X.Y.Z] - YYYY-MM-DD`
    and add a fresh empty `## [Unreleased]` above it. Commit and push.
 4. Run `tools/release.sh X.Y.Z` (use `--dry-run` first if unsure). It checks,
