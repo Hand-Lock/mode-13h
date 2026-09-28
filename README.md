@@ -28,7 +28,6 @@ A lot of “retro” shaders stop at chunky pixels and call it a day.
 
 - The image is downscaled to a **Mode 13h-style `320 x 200`** internal resolution.
 - This gives the shader pack the crunchy image structure typical of classic DOS graphics.
-
 - Textures pick their mipmaps for that `320 x 200` image, so distant surfaces don't shimmer.
 
 ### 🧱 Quake-style texture mapping
@@ -49,13 +48,23 @@ A lot of “retro” shaders stop at chunky pixels and call it a day.
 
 ### 🌫️ Tuned fog
 
-- Fog is adjusted to better match the mood and readability of old-school 3D visuals.
-- It helps sell distance the way older games often did.
+- Fog keeps vanilla's shapes and curves but starts at **half the vanilla distance** by default, selling depth the way older games did.
+- **Start**, **End** and **Density** scales in the menu let you push it thicker or back to vanilla.
 
 ### 🪧 Billboarded sprites
 
-- Many blocks and decorations render as **2D billboards** that always face the player.
+- Flowers and grass, torches, lanterns, chains, amethyst, bamboo and hanging propagules render as **2D billboards** that always face the player.
 - This mimics the sprite-based tricks commonly used in older 3D games.
+- Signs and more blocks can billboard too, with the add-ons below.
+
+### ✋ Painted viewmodel
+
+- First-person hands and held items are drawn **flat and unlit**, like the painted weapon sprites of old shooters.
+- An **ordered dither** at `320 x 200` scale breaks up their gradients before the palette.
+
+### 💧 Night water
+
+- Water turns **darker and more opaque** in low light, so rivers and oceans read as black depths at night.
 
 ## ⚙️ Configuration
 
@@ -75,7 +84,9 @@ You can adjust things such as:
 
 - Requires **Iris** or **Oculus**. **OptiFine is not supported.**
 - Supported: **Minecraft `1.20.1` and `1.21.1`**. Newer versions are best-effort.
-- Targets **OpenGL `4.1`**, so it can also run on **macOS**
+- Targets **OpenGL `4.1`**, so it can also run on **macOS**.
+- **Lightweight:** a handful of geometry passes and one final pass, no composites.
+- **Upgrading from 1.x:** settings for removed or renamed options reset to their defaults.
 
 ## 🧩 Add-ons
 
@@ -106,7 +117,7 @@ A bespoke skybox made specifically for **Mode 13h** may come in the future.
 ## ❌ What It Is Not
 
 - Not just a simple “pixelation” filter
-- Not a generic CRT-style retro effect
+- Not a generic CRT-style retro effect: it emulates the **signal, not the monitor**. No CRT curvature, scanlines or bloom; stretch to `4:3` yourself.
 - Not a clean or modernized take on retro visuals
 
 **Mode 13h** intentionally embraces visual instability, harsh quantization, and awkward old rendering tricks — because that is the whole point.
