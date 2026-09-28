@@ -1,2 +1,3 @@
 .DS_Store
-shaders/.DS_Store
+dist/
+.local.env

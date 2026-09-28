@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tools/check.sh)",
+      "Bash(./tools/check.sh)",
+      "Bash(tools/build.sh:*)",
+      "Bash(./tools/build.sh:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(git push origin main)"
+    ],
+    "ask": [
+      "Bash(tools/release.sh:*)",
+      "Bash(./tools/release.sh:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)"
+    ]
+  }
+}
