@@ -8,7 +8,7 @@
 
 **Mode 13h: MS-DOSify!** is not just a generic “pixelation” shader. It aims to reproduce the actual visual limitations and quirks that gave old DOS-era 3D games their unmistakable look: low resolution, affine texture warping, limited color depth, stepped lighting, billboarded sprites, and carefully tuned fog.
 
-It has currently only been **tested on Minecraft `1.20.1`**, but it **should also work on other versions**.
+It supports **Minecraft `1.20.1` and `1.21.1`** with **Iris** or **Oculus**; every release is tested on both. Newer versions are **best-effort**.
 
 > **Recommended render resolution: `1280 x 800`**  
 > The shader pack is designed to **downscale by 4x** to an internal **`320 x 200`** image, matching classic **Mode 13h** output.  
@@ -69,8 +69,8 @@ You can adjust things such as:
 
 ## 🔧 Technical Notes
 
-- Built for **Iris** and compatible with **Oculus**
-- Currently only **tested with Minecraft `1.20.1`**, though it should work on other versions as well
+- Requires **Iris** or **Oculus**. **OptiFine is not supported.**
+- Supported: **Minecraft `1.20.1` and `1.21.1`**. Newer versions are best-effort.
 - Targets **OpenGL `4.1`**, so it can also run on **macOS**
 
 ## 🧩 Add-ons
@@ -110,5 +110,9 @@ A bespoke skybox made specifically for **Mode 13h** may come in the future.
 ## 🖇️ Credits
 
 - **Shader pack & idea:** *HandLock_*
+
+## 🛠️ Development
+
+See [`AGENTS.md`](https://github.com/Hand-Lock/mode-13h/blob/main/AGENTS.md).
 
 > *“If the textures don’t wobble, it’s not old enough.”*
