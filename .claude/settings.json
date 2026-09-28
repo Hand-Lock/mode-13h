@@ -14,11 +14,6 @@
       "Bash(git push)",
       "Bash(git push origin main)"
     ],
-    "ask": [
-      "Bash(tools/release.sh:*)",
-      "Bash(./tools/release.sh:*)",
-      "Bash(git push --force:*)",
-      "Bash(git push -f:*)"
-    ]
+    "ask": []
   }
 }
