@@ -25,6 +25,13 @@ heavy warping.
   spans to polygon edges; ours are extrapolated along the triangle's plane
   far past 1-block faces, and at grazing angles toward the plane's vanishing
   line, where `1/w → 0` and the UV runs off into other atlas tiles.
+- Terrain and water also clamp the subdivided UV to the face's UV rectangle,
+  `mc_midTexCoord ± |uv − mc_midTexCoord|` from the vertex shader, inset half
+  a texel. Within 2 texels of a face's edge the cap alone still lets the UV
+  cross into the neighboring atlas sprite, which shows as foreign-colored
+  lines along block edges at grazing angles. The bounds are widened to
+  include the exact UV, so a face whose mid isn't its center only loses some
+  wobble. Other programs stay unclamped (particles have no `mc_midTexCoord`).
 - Affine: `uvq = (u, v, 1)`. Surfaces closer than 1.5 blocks fade to
   perspective-correct so walls don't smear when you touch them. The old
   near/range sliders are gone.

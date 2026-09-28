@@ -6,6 +6,7 @@
 #include "/lib/texmap.glsl"
 
 flat in int noAffine;
+in vec4 uvRect;
 
 uniform float alphaTestRef;
 
@@ -13,7 +14,7 @@ uniform float alphaTestRef;
 layout(location=0) out vec4 out0;
 
 void main() {
-    vec2 uv = (noAffine == 1) ? texcoord : texmap(texcoord);
+    vec2 uv = (noAffine == 1) ? texcoord : texmap(texcoord, uvRect);
 
     vec4 c = albedo(uv);
     if (c.a < alphaTestRef) discard;

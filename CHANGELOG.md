@@ -27,8 +27,9 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
   renamed options reset to their defaults.
 
 ### Fixed
-- Surfaces seen at a very steep angle no longer smear or show other blocks'
-  textures with subdivided mapping.
+- Surfaces seen at a very steep angle no longer smear, or show other blocks'
+  textures inside them or as lines along their edges, with subdivided
+  mapping.
 - 1.21.x flora (bush, eyeblossoms, dry grass…) billboards again; it broke in 1.0.3.
 - Copper Age chains and lanterns now actually billboard.
 - Stained glass, ice and other translucents no longer darken at night; only water does.

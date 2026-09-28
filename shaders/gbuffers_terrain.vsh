@@ -12,6 +12,7 @@ uniform mat4  gbufferModelViewInverse;
 uniform ivec2 atlasSize;
 
 flat out int noAffine;
+out vec4 uvRect;
 
 // Drop this vertex off screen (for the faces a billboard doesn't keep).
 #define CULL { gl_Position = vec4(-10.0, -10.0, -10.0, 1.0); return; }
@@ -98,4 +99,8 @@ void main() {
     }
 
     emitVertex(pos, uv);
+
+    // The face's UV rectangle for texmap(): mc_midTexCoord is its center.
+    vec2 h = abs(uv - mc_midTexCoord);
+    uvRect = vec4(mc_midTexCoord - h, mc_midTexCoord + h);
 }

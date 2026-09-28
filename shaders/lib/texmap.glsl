@@ -33,4 +33,15 @@ vec2 texmap(vec2 uvPersp) {
 #endif
 }
 
+// texmap() kept inside the face's UV rectangle (min.xy, max.xy), so
+// subdivision can't pull in a neighboring sprite at the face's edges.
+vec2 texmap(vec2 uvPersp, vec4 rect) {
+    vec2 uv = texmap(uvPersp);
+#if (DOS_TEXMAP == 1)
+    vec2 i = 0.5 / vec2(textureSize(gtexture, 0));  // half a texel inside
+    uv = clamp(uv, min(rect.xy + i, uvPersp), max(rect.zw - i, uvPersp));
+#endif
+    return uv;
+}
+
 #endif

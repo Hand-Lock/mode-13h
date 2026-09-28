@@ -6,12 +6,13 @@
 #include "/lib/texmap.glsl"
 
 flat in int blockId;
+in vec4 uvRect;
 
 /* RENDERTARGETS: 0 */
 layout(location=0) out vec4 out0;
 
 void main() {
-    vec4 c = albedo(texmap(texcoord));
+    vec4 c = albedo(texmap(texcoord, uvRect));
 
     vec3 lm = applyLightmap(lmcoord);
     c.rgb  *= lm;
