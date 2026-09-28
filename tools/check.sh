@@ -33,30 +33,55 @@ inline() {
     { } END { emit(ARGV[1]) }' "$1" </dev/null
 }
 
-# Stubs for what Iris injects at load time.
+# Stubs for what Iris injects at load time, after the #version line.
 STUBS='#define MC_VERSION 12001
 #define IS_IRIS
 #define MC_GL_VERSION 410
 #define MC_GLSL_VERSION 410'
 
-for f in "$S"/*.vsh "$S"/*.fsh; do
-    case $f in *.vsh) stage=vert ;; *) stage=frag ;; esac
-    out="$TMP/$(basename "$f").$stage"
-    body=$(inline "$f") || { err "$f: include failed"; continue; }
+# compile FILE LABEL: compile an inlined program; the stage comes from LABEL.
+compile() {
+    case $2 in *.vsh*) stage=vert ;; *) stage=frag ;; esac
+    if ! log=$(glslangValidator -S "$stage" "$1" 2>&1); then
+        echo "FAIL $2"
+        # Line numbers refer to the inlined source; show that line.
+        printf '%s\n' "$log" | grep '^ERROR: 0:' | while IFS= read -r l; do
+            n=$(printf '%s' "$l" | sed 's/^ERROR: 0:\([0-9]*\):.*/\1/')
+            printf '    %s\n      > %s\n' "$l" "$(sed -n "${n}p" "$1" | sed 's/^[ \t]*//')"
+        done
+    fi
+}
+
+mkdir "$TMP/src"
+progs=$(cd "$S" && ls *.vsh *.fsh)
+for p in $progs; do
+    src=$TMP/src/$p
+    body=$(inline "$S/$p") || { err "$p: include failed"; continue; }
     {
         printf '%s\n' "$body" | sed -n '1p'
         printf '%s\n' "$STUBS"
         printf '%s\n' "$body" | sed '1d'
-    } > "$out"
-    if ! log=$(glslangValidator -S "$stage" "$out" 2>&1); then
-        err "$f"
-        # Line numbers refer to the inlined source; show that line.
-        printf '%s\n' "$log" | grep '^ERROR: 0:' | while IFS= read -r l; do
-            n=$(printf '%s' "$l" | sed 's/^ERROR: 0:\([0-9]*\):.*/\1/')
-            printf '    %s\n      > %s\n' "$l" "$(sed -n "${n}p" "$out" | sed 's/^[ \t]*//')"
-        done
+    } > "$src"
+    compile "$src" "$p"
+done | grep . && fail=1
+
+# Branch pass: recompile each program that mentions an option with every other
+# value of it (sliders: only their extremes).
+sliders=$(sed -n '/^sliders/,/[^\\]$/p' "$S/shaders.properties")
+sed -n 's/^#define \([A-Z0-9_]*\) *\([^ ]*\) *\/\/ *\[\(.*\)\].*/\1 \2 \3/p' "$S/shaders.settings" |
+while read -r opt def vals; do
+    if printf '%s\n' "$sliders" | grep -qw "$opt"; then
+        set -- $vals; first=$1; shift $(($# - 1)); vals="$first $1"
     fi
-done
+    for v in $vals; do
+        [ "$v" = "$def" ] && continue
+        for p in $progs; do
+            grep -w "$opt" "$TMP/src/$p" 2>/dev/null | grep -qv '^#define' || continue
+            sed "s/^#define $opt .*/#define $opt $v/" "$TMP/src/$p" > "$TMP/variant"
+            compile "$TMP/variant" "$p with $opt=$v"
+        done
+    done
+done | grep . && fail=1
 
 # block.properties: comments inside continuations and whitespace after `\`
 # silently drop the blocks that follow.

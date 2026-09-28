@@ -27,9 +27,10 @@ shaders/
   shaders.properties    Iris directives, menu layout, sliders
   block.properties      block → mc_Entity ID map
   lang/en_us.lang       menu labels and tooltips
+  lib/vertex.glsl       shared varyings; emitVertex() when VSH is defined
   lib/common.glsl       gtexture/lightmap samplers, applyLightmap()
-  lib/fog.glsl          vanilla-compatible fog, viewPosFromFrag()
-  lib/affine.glsl       affineUV() (needs fog.glsl first)
+  lib/fog.glsl          vanilla-compatible fog, applyFog(rgb, viewPos)
+  lib/affine.glsl       affineUV()
   lib/palette.glsl      quantize256() (RGB332), quantizeCube6() (216)
   gbuffers_*.vsh/.fsh   geometry passes, each writes colortex0
   final.vsh/.fsh        point-sampled 320×200 downscale + palette
@@ -37,6 +38,8 @@ tools/                  check.sh, build.sh, release.sh, modrinth.json
 ```
 
 Pipeline: every gbuffers program writes lit, fogged color to colortex0.
+Each .vsh is `#define VSH`, `#include "/lib/vertex.glsl"` and a call to
+`emitVertex()`; the .fsh includes the same file for the varyings.
 `final.fsh` takes one texel per `DOS_SCALE`×`DOS_SCALE` cell and quantizes it
 to the palette. At 1280×800 with `DOS_SCALE=4` that is exactly 320×200.
 

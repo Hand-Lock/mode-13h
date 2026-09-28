@@ -1,5 +1,7 @@
 #version 410 compatibility
 #include "/shaders.settings"
+#define VSH
+#include "/lib/vertex.glsl"
 
 attribute vec4 mc_Entity;
 attribute vec4 at_tangent;
@@ -9,197 +11,91 @@ attribute vec3 at_midBlock;
 uniform mat4  gbufferModelViewInverse;
 uniform ivec2 atlasSize;
 
-varying vec2 texcoord;
-noperspective varying vec2 texcoord_np;
-varying vec2 lmcoord;
-varying vec4 vColor;
 flat out int noAffine;
 
-// Billboard rotation: projects vertex offset onto a camera-facing plane.
-// Each variant operates on a different pair of world axes.
-void billboardXZ(inout vec4 pos, vec2 offset, vec2 center) {
-    vec2 v = normalize(gbufferModelViewInverse[2].xz);
-    pos.xz = mat2(v.y, -v.x, v.x, v.y) * offset + center;
-}
-void billboardYZ(inout vec4 pos, vec2 offset, vec2 center) {
-    vec2 v = normalize(gbufferModelViewInverse[2].yz);
-    pos.yz = mat2(v.y, -v.x, v.x, v.y) * offset + center;
-}
-void billboardXY(inout vec4 pos, vec2 offset, vec2 center) {
-    vec2 v = normalize(gbufferModelViewInverse[2].xy);
-    pos.xy = mat2(v.y, -v.x, v.x, v.y) * offset + center;
+// Drop this vertex off screen (for the faces a billboard doesn't keep).
+#define CULL { gl_Position = vec4(-10.0, -10.0, -10.0, 1.0); return; }
+
+// Billboard rotation in the plane of two world axes: the point `offset`
+// blocks from `center` along the camera's right vector. `fwd` holds the
+// camera forward vector's components on those two axes.
+vec2 faceCamera(vec2 fwd, float offset, vec2 center) {
+    vec2 v = normalize(fwd);
+    return center + offset * vec2(v.y, -v.x);
 }
 
 void main() {
-    int blockID = int(mc_Entity.x + 0.5);
+    int id = int(mc_Entity.x + 0.5);
+    vec2 uv = vertexUV();
+    vec4 pos = gl_Vertex;
+    vec3 fwd = gbufferModelViewInverse[2].xyz;
+    vec3 mid = at_midBlock / 64.0;
+    float side = sign(uv.x - mc_midTexCoord.x);
 
-    texcoord    = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
-    texcoord_np = texcoord;
-    lmcoord     = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
-    vColor      = gl_Color;
+    // Billboards stay perspective-correct.
+    noAffine = int((id >= 10950 && id < 10990 && (id != 10956 || FLATTER_SIGNS == 1)) ||
+                   (id == 10990 && BILLY_BOARDING == 1));
 
-    // Disable affine mapping on all billboard geometry
-    noAffine = 0;
-    if ((blockID >= 10950 && blockID <= 10955) ||
-        (blockID >= 10957 && blockID <= 10959) ||
-        (blockID >= 10961 && blockID <= 10964) ||
-        (blockID >= 10965 && blockID <= 10968) ||
-        (blockID >= 10970 && blockID <= 10973)) {
-        noAffine = 1;
-    }
-    #if (FLATTER_SIGNS == 1)
-        if (blockID == 10956) noAffine = 1;
-    #endif
-    #if (BILLY_BOARDING == 1)
-        if (blockID == 10990) noAffine = 1;
-    #endif
-
-    vec4 vertexPos = gl_Vertex;
-
-    // ---- Cross-model flora (10950-10952) ----
-    if ((blockID == 10950 || blockID == 10951 || blockID == 10952) && gl_Normal.y == 0.0) {
+    // ---- Cross models: flora, hanging propagule, Billy Boarding ----
+    if ((id == 10950 || id == 10952 || (id == 10990 && BILLY_BOARDING == 1)) && gl_Normal.y == 0.0) {
         // Keep one face of the cross pair to avoid double-layer artifacts
-        if (sign(gl_Normal.xz) != vec2(1.0, 1.0)) {
-            gl_Position = vec4(-10.0, -10.0, -10.0, 1.0);
-            return;
-        }
-        vec2 offset = vec2((texcoord.x - mc_midTexCoord.x) * sign(at_tangent.w) * float(atlasSize.x) / 16.0, 0.0);
-        vec2 center = vertexPos.xz - 1.8 * offset.x * normalize(at_tangent).xz * sign(at_tangent.w);
-        billboardXZ(vertexPos, offset, center);
+        if (sign(gl_Normal.xz) != vec2(1.0)) CULL
+        float offset = (uv.x - mc_midTexCoord.x) * sign(at_tangent.w) * float(atlasSize.x) / 16.0;
+        vec2 center = pos.xz - 1.8 * offset * normalize(at_tangent).xz * sign(at_tangent.w);
+        pos.xz = faceCamera(fwd.xz, offset, center);
 
         // Hanging propagule: flip UV vertically
-        if (blockID == 10952) {
-            texcoord.y -= 2.0 * (texcoord.y - mc_midTexCoord.y);
-        }
+        if (id == 10952) uv.y = 2.0 * mc_midTexCoord.y - uv.y;
     }
 
-    // ---- Signs: standing and hanging (10956) ----
-    #if (FLATTER_SIGNS == 1)
-    else if (blockID == 10956) {
-        vec3 blockCenter = vertexPos.xyz + at_midBlock / 64.0;
-        float side = (texcoord.x - mc_midTexCoord.x >= 0.0) ? 1.0 : -1.0;
-        vec2 offset = vec2(0.45 * side, 0.0);
-        vec2 center = blockCenter.xz;
-        billboardXZ(vertexPos, offset, center);
-    }
-    #endif
-
-    // ---- Amethyst: up/down facing (10953) ----
-    else if (blockID == 10953) {
-        if (sign(gl_Normal.xz) != vec2(1.0, 1.0)) {
-            gl_Position = vec4(-10.0, -10.0, -10.0, 1.0);
-            return;
-        }
-        vec2 offset = vec2(0.5 * sign(at_midBlock.z) * sign(at_tangent.w), 0.0);
-        vec2 center = vertexPos.xz - 0.905 * sign(texcoord.x - mc_midTexCoord.x) * normalize(at_tangent).xz;
-        billboardXZ(vertexPos, offset, center);
+    // ---- Signs: standing and hanging (Flatter Signs) ----
+    else if (id == 10956 && FLATTER_SIGNS == 1) {
+        float s = (uv.x - mc_midTexCoord.x >= 0.0) ? 1.0 : -1.0;
+        pos.xz = faceCamera(fwd.xz, 0.45 * s, pos.xz + mid.xz);
     }
 
-    // ---- Amethyst: east/west facing (10954) ----
-    else if (blockID == 10954) {
-        if (sign(gl_Normal.yz) != vec2(1.0, 1.0)) {
-            gl_Position = vec4(-10.0, -10.0, -10.0, 1.0);
-            return;
-        }
-        vec2 offset = vec2(0.5 * -sign(at_midBlock.y), 0.0);
-        vec2 center = vertexPos.yz + at_midBlock.yz / 64.0;
-        billboardYZ(vertexPos, offset, center);
+    // ---- Amethyst by facing: up/down, east/west, north/south ----
+    else if (id == 10953) {
+        if (sign(gl_Normal.xz) != vec2(1.0)) CULL
+        vec2 center = pos.xz - 0.905 * side * normalize(at_tangent).xz;
+        pos.xz = faceCamera(fwd.xz, 0.5 * sign(at_midBlock.z) * sign(at_tangent.w), center);
+    }
+    else if (id == 10954) {
+        if (sign(gl_Normal.yz) != vec2(1.0)) CULL
+        pos.yz = faceCamera(fwd.yz, -0.5 * sign(at_midBlock.y), pos.yz + mid.yz);
+    }
+    else if (id == 10955) {
+        if (sign(gl_Normal.xy) != vec2(1.0)) CULL
+        pos.xy = faceCamera(fwd.xy, -0.5 * sign(at_midBlock.x), pos.xy + mid.xy);
     }
 
-    // ---- Amethyst: north/south facing (10955) ----
-    else if (blockID == 10955) {
-        if (sign(gl_Normal.xy) != vec2(1.0, 1.0)) {
-            gl_Position = vec4(-10.0, -10.0, -10.0, 1.0);
-            return;
-        }
-        vec2 offset = vec2(0.5 * -sign(at_midBlock.x), 0.0);
-        vec2 center = vertexPos.xy + at_midBlock.xy / 64.0;
-        billboardXY(vertexPos, offset, center);
+    // ---- Chains by axis: X, Y, Z ----
+    else if (id == 10957) pos.yz = faceCamera(fwd.yz, 1.5 / 16.0 * side, pos.yz + mid.yz);
+    else if (id == 10958) pos.xz = faceCamera(fwd.xz, 1.5 / 16.0 * side, pos.xz + mid.xz);
+    else if (id == 10959) pos.xy = faceCamera(fwd.xy, 1.5 / 16.0 * side, pos.xy + mid.xy);
+
+    // ---- Floor torches and lanterns ----
+    else if (id == 10961) {
+        if (gl_Normal.y != 0.0) CULL
+        float offset = (uv.x - mc_midTexCoord.x) * float(atlasSize.x) / 16.0;
+        pos.xz = faceCamera(fwd.xz, offset, pos.xz + mid.xz);
     }
 
-    // ---- Chain: axis X (10957) ----
-    else if (blockID == 10957) {
-        vec2 offset = vec2(1.5 / 16.0 * sign(texcoord.x - mc_midTexCoord.x), 0.0);
-        vec2 center = vertexPos.yz + at_midBlock.yz / 64.0;
-        billboardYZ(vertexPos, offset, center);
-    }
-
-    // ---- Chain: axis Y (10958) ----
-    else if (blockID == 10958) {
-        vec2 offset = vec2(1.5 / 16.0 * sign(texcoord.x - mc_midTexCoord.x), 0.0);
-        vec2 center = vertexPos.xz + at_midBlock.xz / 64.0;
-        billboardXZ(vertexPos, offset, center);
-    }
-
-    // ---- Chain: axis Z (10959) ----
-    else if (blockID == 10959) {
-        vec2 offset = vec2(1.5 / 16.0 * sign(texcoord.x - mc_midTexCoord.x), 0.0);
-        vec2 center = vertexPos.xy + at_midBlock.xy / 64.0;
-        billboardXY(vertexPos, offset, center);
-    }
-
-    // ---- Floor torches (10961-10963) ----
-    else if (blockID >= 10961 && blockID <= 10963) {
-        if (gl_Normal.y != 0.0) {
-            gl_Position = vec4(-10.0, -10.0, -10.0, 1.0);
-            return;
-        }
-        vec2 offset = vec2((texcoord.x - mc_midTexCoord.x) * float(atlasSize.x) / 16.0, 0.0);
-        vec2 center = vertexPos.xz + at_midBlock.xz / 64.0;
-        billboardXZ(vertexPos, offset, center);
-    }
-
-    // ---- Bamboo stalk (10964) ----
-    else if (blockID == 10964) {
-        if (gl_Normal.z < 0.5 || gl_Normal.x < 0.0) {
-            gl_Position = vec4(-10.0, -10.0, -10.0, 1.0);
-            return;
-        }
-        vec2 offset, center;
+    // ---- Bamboo stalk ----
+    else if (id == 10964) {
+        if (gl_Normal.z < 0.5 || gl_Normal.x < 0.0) CULL
         if (gl_Normal.z > 0.9) {
-            offset = vec2(1.5 / 16.0 * sign(texcoord.x - mc_midTexCoord.x), 0.0);
-            center = vertexPos.xz + vec2(-0.09 * sign(texcoord.x - mc_midTexCoord.x), -1.5 / 16.0);
+            pos.xz = faceCamera(fwd.xz, 1.5 / 16.0 * side, pos.xz + vec2(-0.09 * side, -1.5 / 16.0));
         } else {
-            offset = vec2(0.5 * sign(texcoord.x - mc_midTexCoord.x), 0.0);
-            center = vertexPos.xz - 0.905 * sign(texcoord.x - mc_midTexCoord.x) * normalize(at_tangent).xz;
+            pos.xz = faceCamera(fwd.xz, 0.5 * side, pos.xz - 0.905 * side * normalize(at_tangent).xz);
         }
-        billboardXZ(vertexPos, offset, center);
     }
 
-    // ---- Lanterns: regular and soul (10965-10968) ----
-    else if (blockID >= 10965 && blockID <= 10968) {
-        if (gl_Normal.y != 0.0) {
-            gl_Position = vec4(-10.0, -10.0, -10.0, 1.0);
-            return;
-        }
-        vec2 offset = vec2((texcoord.x - mc_midTexCoord.x) * float(atlasSize.x) / 16.0, 0.0);
-        vec2 center = vertexPos.xz + at_midBlock.xz / 64.0;
-        billboardXZ(vertexPos, offset, center);
+    // ---- Wall torches ----
+    else if (id == 10970) {
+        if (gl_Normal.y > -0.1 || gl_Normal.y < -0.7) CULL
+        pos.xz = faceCamera(fwd.xz, 0.5 * side, pos.xz + mid.xz * sign(abs(gl_Normal.zx)));
     }
 
-    // ---- Wall torches (10970-10973) ----
-    else if (blockID >= 10970 && blockID <= 10973) {
-        if (gl_Normal.y > -0.1 || gl_Normal.y < -0.7) {
-            gl_Position = vec4(-10.0, -10.0, -10.0, 1.0);
-            return;
-        }
-        vec2 offset = vec2(0.5 * sign(texcoord.x - mc_midTexCoord.x), 0.0);
-        vec2 center = vertexPos.xz + (at_midBlock.xz / 64.0) * sign(abs(gl_Normal.zx));
-        billboardXZ(vertexPos, offset, center);
-    }
-
-    // ---- Billy Boarding cross-model blocks (10990) ----
-    #if (BILLY_BOARDING == 1)
-    else if (blockID == 10990 && gl_Normal.y == 0.0) {
-        if (sign(gl_Normal.xz) != vec2(1.0, 1.0)) {
-            gl_Position = vec4(-10.0, -10.0, -10.0, 1.0);
-            return;
-        }
-        vec2 offset = vec2((texcoord.x - mc_midTexCoord.x) * sign(at_tangent.w) * float(atlasSize.x) / 16.0, 0.0);
-        vec2 center = vertexPos.xz - 1.8 * offset.x * normalize(at_tangent).xz * sign(at_tangent.w);
-        billboardXZ(vertexPos, offset, center);
-    }
-    #endif
-
-    gl_Position = gl_ProjectionMatrix * (gl_ModelViewMatrix * vertexPos);
+    emitVertex(pos, uv);
 }

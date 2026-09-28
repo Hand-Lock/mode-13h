@@ -5,6 +5,12 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+### Changed
+- Rain and particles use the generic textured program; rain now wobbles like
+  other geometry.
+- Fog and texture mapping take the pixel position from the vertex shader
+  instead of reconstructing it per pixel. Same look, less work.
+
 ### Fixed
 - 1.21.x flora (bush, eyeblossoms, dry grass…) billboards again; it broke in 1.0.3.
 - Copper Age chains and lanterns now actually billboard.

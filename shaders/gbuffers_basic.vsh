@@ -1,10 +1,8 @@
 #version 410 compatibility
 #include "/shaders.settings"
-
-varying vec4 vColor;
+#define VSH
+#include "/lib/vertex.glsl"
 
 void main() {
-    vec4 pos = ftransform();
-    gl_Position = pos;
-    vColor = gl_Color;
+    emitVertex();
 }

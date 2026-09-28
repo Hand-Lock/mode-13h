@@ -1,13 +1,12 @@
 #version 410 compatibility
+#include "/shaders.settings"
+#include "/lib/vertex.glsl"
+#include "/lib/common.glsl"
 
-uniform sampler2D gtexture;
 uniform float alphaTestRef;
 
-varying vec2 texcoord;
-varying vec4 vColor;
-
 /* RENDERTARGETS: 0 */
-layout(location = 0) out vec4 out0;
+layout(location=0) out vec4 out0;
 
 void main() {
     vec4 c = texture(gtexture, texcoord) * vColor;

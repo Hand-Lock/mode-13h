@@ -6,27 +6,15 @@
 uniform sampler2D gtexture;
 uniform sampler2D lightmap;
 
-// Apply lightmap with ambient floor and optional luminance quantization.
-// AMBIENT_FLOOR and DOS_LIGHT_STEPS are defined in shaders.settings.
+// Lightmap color with an ambient floor (AMBIENT_FLOOR) and its luminance
+// quantized to DOS_LIGHT_STEPS levels, keeping the tint (colormap banding).
 vec3 applyLightmap(vec2 lmuv) {
-    vec3 lm = texture(lightmap, lmuv).rgb;
+    vec3 lm = mix(texture(lightmap, lmuv).rgb, vec3(1.0), clamp(float(AMBIENT_FLOOR), 0.0, 1.0));
 
-    // Raise the floor to avoid pure-black pixels
-    float a = clamp(float(AMBIENT_FLOOR), 0.0, 1.0);
-    lm = lm * (1.0 - a) + vec3(a);
-
-    // Quantize luminance to discrete steps (DOS colormap banding)
     #if (DOS_LIGHT_STEPS > 1)
         float y  = dot(lm, vec3(0.2126, 0.7152, 0.0722));
         float qs = float(DOS_LIGHT_STEPS - 1);
-        float yq = floor(y * qs + 0.5) / qs;
-
-        // Preserve lightmap tint, quantize intensity only
-        if (y > 1e-6) {
-            lm *= (yq / y);
-        } else {
-            lm = vec3(0.0);
-        }
+        lm *= (floor(y * qs + 0.5) / qs) / max(y, 1e-6);
     #endif
 
     return lm;
