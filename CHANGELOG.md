@@ -6,6 +6,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 ## [Unreleased]
 
 ### Changed
+- Textures pick their mipmap for the 320×200 output, so distant surfaces
+  shimmer much less.
 - Rain and particles use the generic textured program; rain now wobbles like
   other geometry.
 - Fog and texture mapping take the pixel position from the vertex shader

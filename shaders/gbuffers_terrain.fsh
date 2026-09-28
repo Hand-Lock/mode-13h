@@ -15,7 +15,7 @@ layout(location=0) out vec4 out0;
 void main() {
     vec2 uv = (noAffine == 1) ? texcoord : affineUV(texcoord, texcoord_np, viewPos);
 
-    vec4 c = texture(gtexture, uv) * vColor;
+    vec4 c = albedo(uv);
     if (c.a < alphaTestRef) discard;
 
     c.rgb *= applyLightmap(lmcoord);

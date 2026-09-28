@@ -11,7 +11,7 @@ flat in int blockId;
 layout(location=0) out vec4 out0;
 
 void main() {
-    vec4 c = texture(gtexture, affineUV(texcoord, texcoord_np, viewPos)) * vColor;
+    vec4 c = albedo(affineUV(texcoord, texcoord_np, viewPos));
 
     vec3 lm = applyLightmap(lmcoord);
     c.rgb  *= lm;

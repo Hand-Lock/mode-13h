@@ -16,7 +16,7 @@ const float BAYER4[16] = float[16](
     15.0,  7.0, 13.0,  5.0);
 
 void main() {
-    vec4 c = texture(gtexture, texcoord) * vColor;
+    vec4 c = albedo(texcoord);
     if (c.a < alphaTestRef) discard;
 
 #if (HAND_FLATTEN == 0)

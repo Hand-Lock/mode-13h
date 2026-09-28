@@ -10,7 +10,7 @@ uniform float alphaTestRef;
 layout(location=0) out vec4 out0;
 
 void main() {
-    vec4 c = texture(gtexture, texcoord) * vColor;
+    vec4 c = albedo(texcoord);
     if (c.a < alphaTestRef) discard;
     c.rgb = applyFog(c.rgb, viewPos);
     out0 = c;

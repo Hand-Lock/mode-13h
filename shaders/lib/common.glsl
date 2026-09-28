@@ -1,10 +1,16 @@
-// Shared samplers and lightmap.
+// Shared samplers, texture fetch and lightmap. Needs vertex.glsl first.
 
 #ifndef COMMON_GLSL
 #define COMMON_GLSL
 
 uniform sampler2D gtexture;
 uniform sampler2D lightmap;
+
+// Tinted texel. The mip bias of log2(DOS_SCALE) filters textures for the
+// resolution that is shown (one sample per cell), so they don't shimmer.
+vec4 albedo(vec2 uv) {
+    return texture(gtexture, uv, log2(float(DOS_SCALE))) * vColor;
+}
 
 // Lightmap color with an ambient floor (AMBIENT_FLOOR) and its luminance
 // quantized to DOS_LIGHT_STEPS levels, keeping the tint (colormap banding).
