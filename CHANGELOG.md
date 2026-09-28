@@ -5,6 +5,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-09-28
+
 ### Added
 - A fixed 256-color palette, now the default: 16 Minecraft hues in 16 shades
   each, like a DOS game's own palette.
