@@ -16,10 +16,11 @@
 /* Bypass: disables palette quantization */
 #define DOS_PALETTE_BYPASS 0 // [0 1]
 
-/* ===== Affine Texture Mapping ===== */
-#define DOS_AFFINE_ENABLE 1    // [0 1]
-#define DOS_AFFINE_NEAR   0.00 // [0.00 0.25 0.50 0.75 1.00 1.50 2.00 3.00]
-#define DOS_AFFINE_RANGE  1.50 // [0.00 0.50 1.00 1.25 1.50 2.00 3.00]
+/* ===== Texture Mapping =====
+   0 = perspective-correct, 1 = Quake-style subdivision every DOS_SPAN output
+   pixels, 2 = affine */
+#define DOS_TEXMAP 1 // [0 1 2]
+#define DOS_SPAN  16 // [8 16 32]
 
 /* ===== Fog Tuning =====
    Multipliers and offsets applied to vanilla fog parameters.

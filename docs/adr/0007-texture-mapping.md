@@ -1,11 +1,11 @@
 # 0007. Texture mapping: Quake-style perspective subdivision by default
 
 Date: 2026-09-28
-Status: Proposed
+Status: Accepted
 
 ## Context
 
-The current affine mapping blends from perspective-correct to fully affine UVs
+The old affine mapping blended from perspective-correct to fully affine UVs
 by distance. Full affine on Minecraft's large quads warps much more than most
 late-90s games did: Quake computed a perspective-correct UV every 16 pixels
 and interpolated linearly between them, giving a subtle wobble instead of
@@ -13,15 +13,24 @@ heavy warping.
 
 ## Decision
 
-- Default: per-span subdivision. Pass `uv/w` and `1/w` as `noperspective`
-  varyings. In the fragment shader, find the span edges every N pixels at
-  320×200 scale, use screen-space derivatives to get perspective-correct UVs
-  at both edges, and interpolate linearly between them.
-- Full affine (the current behavior) stays as an option; so does off.
+- `DOS_TEXMAP`: 0 perspective-correct, 1 subdivided (default), 2 affine.
+- Subdivided: the vertex shader writes `uvq = (u/w, v/w, 1/w)` as one
+  `noperspective` varying, which is linear in screen space. The fragment
+  shader splits each row into spans of `DOS_SPAN` output pixels (default 16,
+  like Quake), aligned to the final cells. It extrapolates `uvq` to both span
+  ends with `dFdx`, divides there, and interpolates linearly in between.
+  If an extrapolated end lies behind the eye (`1/w ≤ 0`), that fragment uses
+  the perspective-correct UV.
+- Affine: `uvq = (u, v, 1)`. Surfaces closer than 1.5 blocks fade to
+  perspective-correct so walls don't smear when you touch them. The old
+  near/range sliders are gone.
+- Billboards and first-person hands are always perspective-correct.
 
 ## Consequences
 
-- A few extra ALU ops and two varyings per fragment; no extra passes.
-- Derivatives are per 2×2 quad, so span edges are approximate on small
-  triangles; that should be invisible at 320×200.
-- Changes the default look (minor version) and adds an option.
+- One `vec3` varying, one `dFdx`, two divides per fragment; no extra passes.
+- `uvq` is linear in screen space, so `dFdx` is exact even across triangle
+  edges; spans are exact per row, like Quake's scanline spans.
+- The UV is continuous across span edges, so mip selection has no seams.
+- Changes the default look (at least a minor version); removes
+  `DOS_AFFINE_ENABLE`, `DOS_AFFINE_NEAR` and `DOS_AFFINE_RANGE`.

@@ -30,7 +30,7 @@ shaders/
   lib/vertex.glsl       shared varyings; emitVertex() when VSH is defined
   lib/common.glsl       gtexture/lightmap samplers, applyLightmap()
   lib/fog.glsl          vanilla-compatible fog, applyFog(rgb, viewPos)
-  lib/affine.glsl       affineUV()
+  lib/texmap.glsl       texmap(): perspective / subdivided / affine UVs
   lib/palette.glsl      quantize256() (RGB332), quantizeCube6() (216)
   gbuffers_*.vsh/.fsh   geometry passes, each writes colortex0
   final.vsh/.fsh        point-sampled 320×200 downscale + palette
@@ -78,7 +78,7 @@ IDs 10950–10999 are reserved for billboards and add-ons (map at the top of
 - **Same shape as an existing category** (a cross plant, a torch…): append the
   block name to that `block.<id>` line.
 - **New shape**: pick a free ID in the range, document it in the header, add a
-  branch in `gbuffers_terrain.vsh`, and add the ID to the `noAffine` test.
+  branch in `gbuffers_terrain.vsh`, and check the `noAffine` range covers it.
 - `block.properties` rules: comments go *above* a key, never between `\`
   continuation lines; nothing after a trailing `\`. Keep old and new block
   names side by side (Iris skips names the running version lacks).

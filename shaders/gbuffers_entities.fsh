@@ -3,7 +3,7 @@
 #include "/lib/vertex.glsl"
 #include "/lib/common.glsl"
 #include "/lib/fog.glsl"
-#include "/lib/affine.glsl"
+#include "/lib/texmap.glsl"
 
 uniform vec4  entityColor;
 uniform float alphaTestRef;
@@ -12,7 +12,7 @@ uniform float alphaTestRef;
 layout(location=0) out vec4 out0;
 
 void main() {
-    vec4 c = albedo(affineUV(texcoord, texcoord_np, viewPos));
+    vec4 c = albedo(texmap(texcoord));
     if (c.a < alphaTestRef) discard;
 
     c.rgb *= applyLightmap(lmcoord);

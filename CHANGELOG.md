@@ -6,6 +6,9 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 ## [Unreleased]
 
 ### Changed
+- Texture mapping defaults to Quake-style subdivision: perspective-correct
+  every 16 pixels and linear in between, a subtle wobble instead of heavy
+  warping. Full affine and perspective-correct are options (Texture Mapping).
 - Textures pick their mipmap for the 320×200 output, so distant surfaces
   shimmer much less.
 - Rain and particles use the generic textured program; rain now wobbles like
@@ -19,6 +22,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 - Stained glass, ice and other translucents no longer darken at night; only water does.
 
 ### Removed
+- Affine Mapping, Near Distance and Fade Range options (replaced by Texture
+  Mapping).
 - OptiFine from the listed loaders. It was never supported.
 - Programs that duplicated their Iris fallback, and an unused one. No visual change.
 

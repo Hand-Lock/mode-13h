@@ -8,7 +8,9 @@ varying vec2 texcoord;
 varying vec2 lmcoord;
 varying vec4 vColor;
 varying vec3 viewPos;
-noperspective varying vec2 texcoord_np;
+// Screen-linear UV for texmap.glsl: (uv, 1) / w when subdividing, (uv, 1)
+// when affine.
+noperspective varying vec3 uvq;
 
 #ifdef VSH
 vec2 vertexUV() {
@@ -18,11 +20,15 @@ vec2 vertexUV() {
 // Fill the varyings and gl_Position from a model-space vertex and its UV.
 void emitVertex(vec4 vertex, vec2 uv) {
     texcoord    = uv;
-    texcoord_np = uv;
     lmcoord     = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
     vColor      = gl_Color;
     viewPos     = (gl_ModelViewMatrix * vertex).xyz;
     gl_Position = gl_ProjectionMatrix * vec4(viewPos, 1.0);
+#if (DOS_TEXMAP == 1)
+    uvq = vec3(uv, 1.0) / gl_Position.w;
+#else
+    uvq = vec3(uv, 1.0);
+#endif
 }
 
 void emitVertex() {

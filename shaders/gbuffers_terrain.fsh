@@ -3,7 +3,7 @@
 #include "/lib/vertex.glsl"
 #include "/lib/common.glsl"
 #include "/lib/fog.glsl"
-#include "/lib/affine.glsl"
+#include "/lib/texmap.glsl"
 
 flat in int noAffine;
 
@@ -13,7 +13,7 @@ uniform float alphaTestRef;
 layout(location=0) out vec4 out0;
 
 void main() {
-    vec2 uv = (noAffine == 1) ? texcoord : affineUV(texcoord, texcoord_np, viewPos);
+    vec2 uv = (noAffine == 1) ? texcoord : texmap(texcoord);
 
     vec4 c = albedo(uv);
     if (c.a < alphaTestRef) discard;

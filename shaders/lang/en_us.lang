@@ -26,21 +26,19 @@ option.DOS_PALETTE_BYPASS.comment=Disables palette quantization entirely. Useful
 value.DOS_PALETTE_BYPASS.0=OFF
 value.DOS_PALETTE_BYPASS.1=ON
 
-# ===== Affine Mapping =====
+# ===== Texture Mapping =====
 
-screen.AFFINE=Affine Mapping
-screen.AFFINE.comment=Affine (non-perspective-correct) texture warping, as seen in PS1 and DOS software renderers.
+screen.TEXMAP=Texture Mapping
+screen.TEXMAP.comment=How textures follow perspective. Late-90s software renderers corrected it only every few pixels.
 
-option.DOS_AFFINE_ENABLE=Affine Mapping
-option.DOS_AFFINE_ENABLE.comment=Enables affine texture distortion on world geometry.
-value.DOS_AFFINE_ENABLE.0=OFF
-value.DOS_AFFINE_ENABLE.1=ON
+option.DOS_TEXMAP=Mapping
+option.DOS_TEXMAP.comment=Subdivided: exact every few pixels and linear in between, like Quake (subtle wobble). Affine: never corrected, like the PlayStation (heavy warping). Billboards and hands are always perspective-correct.
+value.DOS_TEXMAP.0=Perspective
+value.DOS_TEXMAP.1=Subdivided
+value.DOS_TEXMAP.2=Affine
 
-option.DOS_AFFINE_NEAR=Near Distance
-option.DOS_AFFINE_NEAR.comment=Surfaces closer than this distance blend toward perspective-correct mapping.
-
-option.DOS_AFFINE_RANGE=Fade Range
-option.DOS_AFFINE_RANGE.comment=Distance over which the blend from perspective-correct to full affine occurs.
+option.DOS_SPAN=Span Width
+option.DOS_SPAN.comment=Output pixels between perspective-correct points in Subdivided mode. Quake used 16; wider spans wobble more.
 
 # ===== Fog Tuning =====
 
