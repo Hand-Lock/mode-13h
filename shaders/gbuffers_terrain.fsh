@@ -18,7 +18,7 @@ uniform float alphaTestRef;
 void main(){
     vec2 uv = (noAffine == 1) ? texcoord : affineUV(texcoord, texcoord_np);
 
-    vec4 c = texture2D(texture, uv) * vColor;
+    vec4 c = texture(gtexture, uv) * vColor;
     if (c.a < alphaTestRef) discard;
 
     c.rgb *= applyLightmap(lmcoord.xy);

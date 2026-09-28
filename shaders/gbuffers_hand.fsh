@@ -50,7 +50,7 @@ vec3 applyHandDither(vec3 c) {
 }
 
 void main() {
-    vec4 c = texture2D(texture, texcoord) * vColor;
+    vec4 c = texture(gtexture, texcoord) * vColor;
     if (c.a < alphaTestRef) discard;
 
 #if (HAND_FLATTEN == 0)

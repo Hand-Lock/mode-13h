@@ -10,7 +10,7 @@ varying vec4 vColor;
 layout(location = 0) out vec4 out0;
 
 void main() {
-    vec4 c = texture2D(gtexture, texcoord) * vColor;
+    vec4 c = texture(gtexture, texcoord) * vColor;
     if (c.a < alphaTestRef) discard;
     out0 = c;
 }

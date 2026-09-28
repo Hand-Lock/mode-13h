@@ -1,4 +1,4 @@
-// /shaders/lib/affine.glsl — Affine texture mapping helper (GL 4.1)
+// Affine texture mapping helper (GL 4.1)
 // Requires viewPosFromFrag() from fog.glsl, which must be included first.
 
 #ifndef AFFINE_GLSL

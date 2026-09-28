@@ -12,7 +12,7 @@ uniform sampler2D gtexture;
 uniform float     alphaTestRef;
 
 void main() {
-    vec4 c = texture2D(gtexture, texcoord) * vColor;
+    vec4 c = texture(gtexture, texcoord) * vColor;
     if (c.a < alphaTestRef) discard;
     c.rgb = applyFog(c.rgb);
     out0 = c;

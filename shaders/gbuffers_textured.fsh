@@ -15,7 +15,7 @@ varying vec4 vColor;
 void main() {
     vec2 uv = affineUV(texcoord, texcoord_np);
 
-    vec4 c = texture2D(texture, uv) * vColor;
+    vec4 c = texture(gtexture, uv) * vColor;
     c.rgb *= applyLightmap(lmcoord.xy);
     c.rgb  = applyFog(c.rgb);
     out0 = c;

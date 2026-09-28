@@ -16,7 +16,7 @@ uniform vec4 entityColor;
 void main() {
     vec2 uv = affineUV(texcoord, texcoord_np);
 
-    vec4 c = texture2D(texture, uv) * vColor;
+    vec4 c = texture(gtexture, uv) * vColor;
     if (c.a <= 0.0) discard;
 
     c.rgb = mix(c.rgb, entityColor.rgb, entityColor.a);

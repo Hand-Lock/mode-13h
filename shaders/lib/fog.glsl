@@ -1,4 +1,4 @@
-// /shaders/lib/fog.glsl — Vanilla-compatible fog (GL 4.1, Iris/Oculus)
+// Vanilla-compatible fog (GL 4.1, Iris/Oculus)
 // Supports spherical and cylindrical distance, linear/exp/exp2 curves,
 // and optional parameter tuning. Exposes viewPosFromFrag() for affine.glsl.
 

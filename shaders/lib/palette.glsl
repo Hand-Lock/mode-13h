@@ -1,4 +1,4 @@
-// /shaders/lib/palette.glsl — Color reduction helpers (GL 4.1)
+// Color reduction helpers (GL 4.1)
 
 #ifndef PALETTE_GLSL
 #define PALETTE_GLSL

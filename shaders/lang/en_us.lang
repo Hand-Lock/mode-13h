@@ -1,4 +1,4 @@
-# DOSGL-13h — Iris/Oculus language file
+# Mode 13h — language file
 
 # ===== Main Screen =====
 
@@ -14,7 +14,7 @@ option.DOS_LIGHT_STEPS.comment=Number of discrete light levels. Simulates banded
 # ===== Color Reduction =====
 
 screen.COLOR=Color Reduction
-screen.COLOR.comment=Palette mode and color grading bypass.
+screen.COLOR.comment=Palette mode and bypass.
 
 option.DOS_PALETTE_256=Palette Mode
 option.DOS_PALETTE_256.comment=Selects the color reduction method applied in the final pass.
@@ -22,7 +22,7 @@ value.DOS_PALETTE_256.0=216 Colors (6x6x6)
 value.DOS_PALETTE_256.1=256 Colors (RGB332)
 
 option.DOS_PALETTE_BYPASS=Bypass
-option.DOS_PALETTE_BYPASS.comment=Disables color grading and palette quantization entirely. Useful for debugging or screenshots.
+option.DOS_PALETTE_BYPASS.comment=Disables palette quantization entirely. Useful for debugging or screenshots.
 value.DOS_PALETTE_BYPASS.0=OFF
 value.DOS_PALETTE_BYPASS.1=ON
 

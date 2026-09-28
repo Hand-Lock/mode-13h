@@ -1,8 +1,5 @@
-/* /shaders/shaders.settings */
-/* DOSGL-13h — GL 4.1 */
-
-#define DOS_SATURATION 1.0
-#define DOS_CONTRAST   1.0
+/* Mode 13h options. Every `// [...]` define is a menu option: keep it in sync
+   with shaders.properties (screen) and lang/en_us.lang. See AGENTS.md. */
 
 /* Downscale factor: 1280x800 / 4 = 320x200 (Mode 13h) */
 #define DOS_SCALE 4 // [1 2 3 4 5 6 7 8]
@@ -16,7 +13,7 @@
 /* Palette mode: 0 = 6x6x6 cube (216 colors), 1 = RGB332 (256 colors) */
 #define DOS_PALETTE_256 1 // [0 1]
 
-/* Bypass: disables color grading and palette quantization entirely */
+/* Bypass: disables palette quantization */
 #define DOS_PALETTE_BYPASS 0 // [0 1]
 
 /* ===== Affine Texture Mapping ===== */

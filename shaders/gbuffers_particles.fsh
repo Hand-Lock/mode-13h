@@ -11,7 +11,7 @@ varying vec2 lmcoord;
 varying vec4 vColor;
 
 void main() {
-    vec4 c = texture2D(texture, texcoord) * vColor;
+    vec4 c = texture(gtexture, texcoord) * vColor;
     if (c.a <= 0.0) discard;
 
     c.rgb *= applyLightmap(lmcoord.xy);
