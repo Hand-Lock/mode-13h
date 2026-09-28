@@ -108,9 +108,11 @@ You can't see the game. Ask the user to reload shaders in-game (default `R`
 in the shader screen, or F3+R) and press F2, then read the newest screenshot:
 
 ```sh
-. ./.local.env
-IFS=:; for d in $MC_DIRS; do ls -t "$d/screenshots"/*.png | head -1; done
+sh -c '. ./.local.env; IFS=:; for d in $MC_DIRS; do
+  ls -t "$d/screenshots"/*.png | head -1; done'
 ```
+
+(`sh -c` because zsh doesn't split `$MC_DIRS` on `IFS`.)
 
 `.local.env` is gitignored and holds `MC_DIRS`, a colon-separated list of
 `.minecraft` directories of the dev instances (1.20.1 and 1.21.1). If it is
