@@ -1,5 +1,5 @@
 // Texture mapping modes (DOS_TEXMAP): 0 perspective-correct, 1 Quake-style
-// subdivision, 2 affine. Needs vertex.glsl first. ADR 0007.
+// subdivision, 2 affine. Needs vertex.glsl and common.glsl first. ADR 0007.
 
 #ifndef TEXMAP_GLSL
 #define TEXMAP_GLSL
@@ -17,7 +17,13 @@ vec2 texmap(vec2 uvPersp) {
     vec3  b  = a + d * S;
     // An extrapolated end behind the eye has no valid UV.
     if (min(a.z, b.z) <= 1e-6) return uvPersp;
-    return mix(a.xy / a.z, b.xy / b.z, (x - x0) / S);
+    // Quake's spans ended at polygon edges; ours are extrapolated past small
+    // block faces and, at grazing angles, toward the plane's vanishing line.
+    // Cap the deviation from the exact UV so that stays a wobble, not a smear.
+    const float MAX_WOBBLE = 2.0;                  // texels
+    vec2  e = mix(a.xy / a.z, b.xy / b.z, (x - x0) / S) - uvPersp;
+    float n = length(e * vec2(textureSize(gtexture, 0)));
+    return uvPersp + e * min(1.0, MAX_WOBBLE / max(n, 1e-6));
 #elif (DOS_TEXMAP == 2)
     // Fully affine past 1.5 blocks; closer surfaces fade to correct, so
     // walls you walk into don't smear.

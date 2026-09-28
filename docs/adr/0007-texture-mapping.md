@@ -21,6 +21,10 @@ heavy warping.
   ends with `dFdx`, divides there, and interpolates linearly in between.
   If an extrapolated end lies behind the eye (`1/w ≤ 0`), that fragment uses
   the perspective-correct UV.
+- Subdivided UVs may stray at most 2 texels from the exact UV. Quake clipped
+  spans to polygon edges; ours are extrapolated along the triangle's plane
+  far past 1-block faces, and at grazing angles toward the plane's vanishing
+  line, where `1/w → 0` and the UV runs off into other atlas tiles.
 - Affine: `uvq = (u, v, 1)`. Surfaces closer than 1.5 blocks fade to
   perspective-correct so walls don't smear when you touch them. The old
   near/range sliders are gone.
@@ -32,5 +36,9 @@ heavy warping.
 - `uvq` is linear in screen space, so `dFdx` is exact even across triangle
   edges; spans are exact per row, like Quake's scanline spans.
 - The UV is continuous across span edges, so mip selection has no seams.
+  The cap keeps it continuous: the error is 0 at span ends and the cap is a
+  continuous function of it. Normal-angle wobble stays under the cap.
+- The cap costs one `textureSize` and a few ALU ops per fragment. Affine mode
+  stays uncapped: heavy warping is its point.
 - Changes the default look (at least a minor version); removes
   `DOS_AFFINE_ENABLE`, `DOS_AFFINE_NEAR` and `DOS_AFFINE_RANGE`.
