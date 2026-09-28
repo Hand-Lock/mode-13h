@@ -3,13 +3,21 @@
 #ifndef COMMON_GLSL
 #define COMMON_GLSL
 
+#include "/lib/palette.glsl"
+
 uniform sampler2D gtexture;
 uniform sampler2D lightmap;
 
 // Tinted texel. The mip bias of log2(DOS_SCALE) filters textures for the
 // resolution that is shown (one sample per cell), so they don't shimmer.
+// With DOS_COLORMAP the texel is snapped to the palette before lighting, so
+// final's palette pass moves shading along the palette's ramps (ADR 0011).
 vec4 albedo(vec2 uv) {
-    return texture(gtexture, uv, log2(float(DOS_SCALE))) * vColor;
+    vec4 c = texture(gtexture, uv, log2(float(DOS_SCALE))) * vColor;
+#if (DOS_COLORMAP == 1)
+    c.rgb = palettize(c.rgb);
+#endif
+    return c;
 }
 
 // Lightmap color with an ambient floor (AMBIENT_FLOOR) and its luminance

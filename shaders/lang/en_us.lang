@@ -16,6 +16,11 @@ value.DOS_PALETTE.2=VGA
 value.DOS_PALETTE.3=RGB332
 value.DOS_PALETTE.4=6x6x6
 
+option.DOS_COLORMAP=Colormap Lighting
+option.DOS_COLORMAP.comment=Textures use only palette colors, and shading steps down each color's ramp instead of dimming smoothly, like the colormaps of Doom and Quake. Needs a palette.
+value.DOS_COLORMAP.0=OFF
+value.DOS_COLORMAP.1=ON
+
 option.DOS_LIGHT_STEPS=Light Steps
 option.DOS_LIGHT_STEPS.comment=Number of discrete light levels. Simulates banded colormap lighting as in DOS-era engines. 0 disables quantization.
 

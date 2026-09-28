@@ -9,6 +9,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 - A fixed 256-color palette, now the default: 16 Minecraft hues in 16 shades
   each, like a DOS game's own palette.
 - The stock VGA palette, as an option.
+- Colormap lighting (default on): textures use only palette colors and
+  shading steps down each color's ramp, like Doom and Quake.
 
 ### Changed
 - Texture mapping defaults to Quake-style subdivision: perspective-correct
