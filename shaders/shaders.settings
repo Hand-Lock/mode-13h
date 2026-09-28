@@ -23,21 +23,15 @@
 #define DOS_TEXMAP 1 // [0 1 2]
 #define DOS_SPAN  16 // [8 16 32]
 
-/* ===== Fog Tuning =====
-   Multipliers and offsets applied to vanilla fog parameters.
-   Does not change fog mode or shape — only adjusts distances/density. */
-#define FOG_TUNE_ENABLE   1    // [0 1]
+/* ===== Fog =====
+   Multipliers on vanilla fog distances and density; 1.00 is vanilla. */
 #define FOG_START_SCALE   0.50 // [0.25 0.50 0.75 1.00 1.25 1.50 2.00 3.00]
-#define FOG_START_ADD     0    // [-128 -64 -32 -16 -8 -4 0 4 8 16 32 64 128]
 #define FOG_END_SCALE     1.00 // [0.25 0.50 0.75 1.00 1.25 1.50 2.00 3.00]
-#define FOG_END_ADD       0    // [-256 -128 -64 -32 -16 -8 0 8 16 32 64 128 256]
 #define FOG_DENSITY_SCALE 1.00 // [0.25 0.50 0.75 1.00 1.25 1.50 2.00 3.00 4.00]
-#define FOG_MIN_RANGE     1.00 // [0.10 0.50 1.00 2.00 4.00 8.00 16.00]
 
 /* ===== Hands ===== */
-#define HAND_FLATTEN        1    // [0 1]
-#define HAND_DITHER         1    // [0 1]
-#define HAND_DITHER_STRENGTH 1.00 // [0.00 0.25 0.50 0.75 1.00]
+#define HAND_FLATTEN 1    // [0 1]
+#define HAND_DITHER  1.00 // [0.00 0.25 0.50 0.75 1.00]
 
 /* ===== Add-on Toggles ===== */
 #define FLATTER_SIGNS  0 // [0 1]

@@ -25,12 +25,10 @@ void main() {
 
     c.rgb = applyFog(c.rgb, viewPos);
 
-#if (HAND_DITHER == 1)
-    // 4x4 ordered dither at macro-pixel scale
+    // 4x4 ordered dither at macro-pixel scale; HAND_DITHER 0 adds nothing.
     ivec2 p = (ivec2(gl_FragCoord.xy) / DOS_SCALE) & 3;
     float d = (BAYER4[p.y * 4 + p.x] - 7.5) / 16.0;
-    c.rgb = clamp(c.rgb + d * float(HAND_DITHER_STRENGTH) / 16.0, 0.0, 1.0);
-#endif
+    c.rgb = clamp(c.rgb + d * float(HAND_DITHER) / 16.0, 0.0, 1.0);
 
     out0 = c;
 }

@@ -22,6 +22,7 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
   other geometry.
 - Fog and texture mapping take the pixel position from the vertex shader
   instead of reconstructing it per pixel. Same look, less work.
+- Viewmodel Dithering is now a strength slider; 0 turns it off.
 
 ### Fixed
 - 1.21.x flora (bush, eyeblossoms, dry grass…) billboards again; it broke in 1.0.3.
@@ -33,6 +34,10 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
   RGB332, 6x6x6).
 - Affine Mapping, Near Distance and Fade Range options (replaced by Texture
   Mapping).
+- Fog Tuning toggle, Start/End Offset and Minimum Range options. Fog keeps
+  its Start, End and Density scales; 1.00 is vanilla.
+- Dither Strength option (merged into Viewmodel Dithering).
+- Saved settings for removed or renamed options reset to their defaults.
 - OptiFine from the listed loaders. It was never supported.
 - Programs that duplicated their Iris fallback, and an unused one. No visual change.
 

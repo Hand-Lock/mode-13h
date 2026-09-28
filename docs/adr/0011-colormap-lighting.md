@@ -32,5 +32,5 @@ ones (sky, clouds, spider eyes) it matches what `final` does anyway.
 - One extra `texelFetch` per textured fragment; no new textures or passes.
 - Works with any palette, not only ramp ones: with VGA or RGB332, shading
   snaps to whatever the palette offers.
-- The texel is rounded to the 32³ grid before lighting, so very dark
-  lighting can merge neighboring texture colors, as low colormap rows did.
+- Texture colors that map to the same palette entry merge, as they did in
+  8-bit textures.
