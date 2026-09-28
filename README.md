@@ -40,6 +40,7 @@ A lot of “retro” shaders stop at chunky pixels and call it a day.
 - Every pixel is drawn from a **fixed 256-color palette**, like a DOS game's own.
 - The default **ramp** palette has 16 Minecraft hues (stone, dirt, grass, water, lava, gold…) in 16 shades each.
 - Prefer the classic? Pick the **stock VGA palette**, or the computed **RGB332** and **`6 x 6 x 6`** palettes.
+- Or play in the colors of a classic: **Wolfenstein 3D**, **Doom**, **Heretic**, **Hexen**, **Quake**, **Duke Nukem 3D**, **Daggerfall**, or the **Mac OS** system palette.
 
 ### 💡 Colormap lighting
 
@@ -73,7 +74,7 @@ The shader includes a **configuration menu** with several options so you can fin
 You can adjust things such as:
 
 - **Pixel scale** (resolution reduction)
-- **Palette**: ramp, stock VGA, RGB332, `6 x 6 x 6` or off
+- **Palette**: ramp, stock VGA, RGB332, `6 x 6 x 6`, Mac OS, seven classic game palettes, or off
 - **Colormap lighting**, **light steps** and **ambient floor**
 - **Texture mapping**: subdivided, affine or perspective-correct, and the span width
 - **Fog** start, end and density

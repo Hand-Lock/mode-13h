@@ -5,6 +5,10 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+### Added
+- Palettes from Wolfenstein 3D, Doom, Heretic, Hexen, Quake, Duke Nukem 3D
+  and Daggerfall, and the Mac OS system palette.
+
 ## [2.0.0] - 2026-09-28
 
 ### Added

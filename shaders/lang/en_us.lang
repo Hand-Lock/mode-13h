@@ -9,12 +9,20 @@ option.AMBIENT_FLOOR=Ambient Floor
 option.AMBIENT_FLOOR.comment=Minimum lightmap brightness. Prevents pure black in unlit areas.
 
 option.DOS_PALETTE=Palette
-option.DOS_PALETTE.comment=The 256 colors of the output. Ramp: 16 Minecraft hues in 16 shades each, like a DOS game's hand-made palette. VGA: the stock BIOS palette. RGB332 and 6x6x6 split each channel evenly.
+option.DOS_PALETTE.comment=The 256 colors of the output. Ramp: 16 Minecraft hues in 16 shades each, like a DOS game's hand-made palette. VGA: the stock BIOS palette. RGB332 and 6x6x6 split each channel evenly. The others are the Mac OS system palette and the palettes of classic DOS games.
 value.DOS_PALETTE.0=Off
 value.DOS_PALETTE.1=Ramp
 value.DOS_PALETTE.2=VGA
 value.DOS_PALETTE.3=RGB332
 value.DOS_PALETTE.4=6x6x6
+value.DOS_PALETTE.5=Mac OS
+value.DOS_PALETTE.6=Wolf3D
+value.DOS_PALETTE.7=Doom
+value.DOS_PALETTE.8=Heretic
+value.DOS_PALETTE.9=Hexen
+value.DOS_PALETTE.10=Quake
+value.DOS_PALETTE.11=Duke 3D
+value.DOS_PALETTE.12=Daggerfall
 
 option.DOS_COLORMAP=Colormap Lighting
 option.DOS_COLORMAP.comment=Textures use only palette colors, and shading steps down each color's ramp instead of dimming smoothly, like the colormaps of Doom and Quake. Needs a palette.

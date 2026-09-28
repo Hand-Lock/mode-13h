@@ -11,8 +11,10 @@
 #define DOS_LIGHT_STEPS 16 // [0 2 4 8 16 32 64]
 
 /* Palette: 0 = off, 1 = ramp (Mode 13h), 2 = stock VGA, 3 = RGB332,
-   4 = 6x6x6 cube. 1 and 2 come from textures/palette.dat (tools/palette.sh). */
-#define DOS_PALETTE 1 // [0 1 2 3 4]
+   4 = 6x6x6 cube, 5 = Mac OS, 6 = Wolfenstein 3D, 7 = Doom, 8 = Heretic,
+   9 = Hexen, 10 = Quake, 11 = Duke Nukem 3D, 12 = Daggerfall. All but 0, 3
+   and 4 come from textures/palette.dat (tools/palette.sh). */
+#define DOS_PALETTE 1 // [0 1 2 3 4 5 6 7 8 9 10 11 12]
 
 /* Colormap lighting: textures snap to the palette before lighting */
 #define DOS_COLORMAP 1 // [0 1]

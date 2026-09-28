@@ -1,8 +1,9 @@
 #!/bin/sh
 # Build shaders/textures/palette.dat, the palette lookup texture: for each
 # input color on a 32x32x32 grid, the nearest entry (in OKLab) of each palette
-# in tools/palettes/. Raw RGBA8, x = red, y = green, z = blue; z 0-31 is
-# ramp.txt, z 32-63 is vga.txt. Deterministic: ties go to the lower index.
+# in tools/palettes/. Raw RGBA8, x = red, y = green, z = blue; palette k in
+# the loop below (the LUT slot) fills z 32k to 32k+31. Deterministic: ties go
+# to the lower index.
 # Usage: tools/palette.sh
 set -eu
 
@@ -55,7 +56,7 @@ END {
 
 tmp=$(mktemp)
 trap 'rm -f "$tmp"' EXIT
-for p in ramp vga; do
+for p in ramp vga mac wolf3d doom heretic hexen quake duke3d daggerfall; do
     awk "$lut" "tools/palettes/$p.txt" >> "$tmp"
 done
 xxd -r -p "$tmp" > "$out"

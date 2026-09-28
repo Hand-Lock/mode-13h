@@ -42,8 +42,10 @@ real hardware did.
   (1–8, default 4).
 - **Palette** (`DOS_PALETTE`). A fixed 256-color palette looked up through a
   32³ OKLab nearest-color LUT (`textures/palette.dat`): the ramp palette
-  (16 Minecraft hues × 16 shades, default) or the stock VGA palette. RGB332
-  and a 6×6×6 cube are computed; 0 turns the palette off. ADRs 0006, 0010.
+  (16 Minecraft hues × 16 shades, default), the stock VGA palette, the Mac OS
+  system palette, or the world palette of a classic game (Wolfenstein 3D,
+  Doom, Heretic, Hexen, Quake, Duke Nukem 3D, Daggerfall). RGB332 and a
+  6×6×6 cube are computed; 0 turns the palette off. ADRs 0006, 0010, 0013.
 - **Colormap lighting** (`DOS_COLORMAP`, default on). Textures snap to the
   palette before lighting, so shading steps down each color's ramp like
   Doom/Quake colormaps. ADR 0011.
