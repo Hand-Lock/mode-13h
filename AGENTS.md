@@ -116,8 +116,12 @@ sh -c '. ./.local.env; IFS=:; for d in $MC_DIRS; do
 
 `.local.env` is gitignored and holds `MC_DIRS`, a colon-separated list of
 `.minecraft` directories of the dev instances (1.20.1 and 1.21.1). If it is
-missing, ask the user for the paths and write it. The dev instances load this
-repo through a symlink in their `shaderpacks/` folder.
+missing, ask the user for the paths and write it.
+
+The dev instances load this repo as `shaderpacks/mode-13h-dev/`, a real folder
+holding one symlink, `shaders`, to the repo's `shaders/`. Don't symlink the
+pack folder itself: Iris's validity check walks the pack without following
+links, finds no `shaders/` and rejects the pack ("is not valid").
 
 ## Release
 
