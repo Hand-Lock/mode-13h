@@ -5,6 +5,11 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+### Added
+- A fixed 256-color palette, now the default: 16 Minecraft hues in 16 shades
+  each, like a DOS game's own palette.
+- The stock VGA palette, as an option.
+
 ### Changed
 - Texture mapping defaults to Quake-style subdivision: perspective-correct
   every 16 pixels and linear in between, a subtle wobble instead of heavy
@@ -22,6 +27,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 - Stained glass, ice and other translucents no longer darken at night; only water does.
 
 ### Removed
+- Palette Mode and Bypass options, replaced by Palette (Off, Ramp, VGA,
+  RGB332, 6x6x6).
 - Affine Mapping, Near Distance and Fade Range options (replaced by Texture
   Mapping).
 - OptiFine from the listed loaders. It was never supported.

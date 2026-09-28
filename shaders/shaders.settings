@@ -10,11 +10,9 @@
 /* Light quantization steps (0 = off, 16 matches vanilla light levels) */
 #define DOS_LIGHT_STEPS 16 // [0 2 4 8 16 32 64]
 
-/* Palette mode: 0 = 6x6x6 cube (216 colors), 1 = RGB332 (256 colors) */
-#define DOS_PALETTE_256 1 // [0 1]
-
-/* Bypass: disables palette quantization */
-#define DOS_PALETTE_BYPASS 0 // [0 1]
+/* Palette: 0 = off, 1 = ramp (Mode 13h), 2 = stock VGA, 3 = RGB332,
+   4 = 6x6x6 cube. 1 and 2 come from textures/palette.dat (tools/palette.sh). */
+#define DOS_PALETTE 1 // [0 1 2 3 4]
 
 /* ===== Texture Mapping =====
    0 = perspective-correct, 1 = Quake-style subdivision every DOS_SPAN output

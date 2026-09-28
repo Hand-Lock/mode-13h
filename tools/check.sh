@@ -83,6 +83,11 @@ while read -r opt def vals; do
     done
 done | grep . && fail=1
 
+# Palette LUT: 32x32x64 RGBA8 from tools/palette.sh.
+lut=$S/textures/palette.dat
+[ "$(wc -c < "$lut" 2>/dev/null | tr -d ' ')" = 262144 ] ||
+    err "$lut: missing or not 262144 bytes (run tools/palette.sh)"
+
 # block.properties: comments inside continuations and whitespace after `\`
 # silently drop the blocks that follow.
 awk '

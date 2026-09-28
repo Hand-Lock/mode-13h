@@ -8,23 +8,16 @@ option.DOS_SCALE.comment=Downscale factor for the final image. At 1280x800 with 
 option.AMBIENT_FLOOR=Ambient Floor
 option.AMBIENT_FLOOR.comment=Minimum lightmap brightness. Prevents pure black in unlit areas.
 
+option.DOS_PALETTE=Palette
+option.DOS_PALETTE.comment=The 256 colors of the output. Ramp: 16 Minecraft hues in 16 shades each, like a DOS game's hand-made palette. VGA: the stock BIOS palette. RGB332 and 6x6x6 split each channel evenly.
+value.DOS_PALETTE.0=Off
+value.DOS_PALETTE.1=Ramp
+value.DOS_PALETTE.2=VGA
+value.DOS_PALETTE.3=RGB332
+value.DOS_PALETTE.4=6x6x6
+
 option.DOS_LIGHT_STEPS=Light Steps
 option.DOS_LIGHT_STEPS.comment=Number of discrete light levels. Simulates banded colormap lighting as in DOS-era engines. 0 disables quantization.
-
-# ===== Color Reduction =====
-
-screen.COLOR=Color Reduction
-screen.COLOR.comment=Palette mode and bypass.
-
-option.DOS_PALETTE_256=Palette Mode
-option.DOS_PALETTE_256.comment=Selects the color reduction method applied in the final pass.
-value.DOS_PALETTE_256.0=216 Colors (6x6x6)
-value.DOS_PALETTE_256.1=256 Colors (RGB332)
-
-option.DOS_PALETTE_BYPASS=Bypass
-option.DOS_PALETTE_BYPASS.comment=Disables palette quantization entirely. Useful for debugging or screenshots.
-value.DOS_PALETTE_BYPASS.0=OFF
-value.DOS_PALETTE_BYPASS.1=ON
 
 # ===== Texture Mapping =====
 

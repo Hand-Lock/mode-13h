@@ -1,7 +1,7 @@
 # 0006. Palette: fixed 256-color palette through a LUT
 
 Date: 2026-09-28
-Status: Accepted — not yet implemented
+Status: Accepted (implemented as ADR 0010)
 
 ## Context
 
