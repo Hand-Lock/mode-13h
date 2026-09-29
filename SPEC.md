@@ -87,8 +87,11 @@ cross/hatch geometry so the terrain vertex shader can billboard them. ADR 0005.
   add-ons.
 - **10956**: sign cross-models from Flatter Signs; toggle `FLATTER_SIGNS`.
 - **10990**: cross/hatch models from Billy Boarding; toggle `BILLY_BOARDING`.
-  The list tracks the blocks Billy Boarding ships cross models for; a block
-  is added when its art lands.
+  Only horizontal diagonal faces are billboarded, keeping the (+x,+z) one of
+  each pair; a face's offset from the block center along its normal becomes
+  depth toward the camera, so layered crosses stay apart. Other faces are
+  drawn as they are, with the alpha discard. The list tracks the blocks Billy
+  Boarding ships cross models for; a block is added when its art lands.
 - Toggles default to off, because without the add-on these blocks have normal
   models and billboarding them would break them.
 - Changing or removing an add-on ID is a major version bump.

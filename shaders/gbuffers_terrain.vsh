@@ -40,12 +40,23 @@ void main() {
     billy = int(id == 10990);
 
     // ---- Cross models: flora, hanging propagule, Billy Boarding ----
-    if ((id == 10950 || id == 10952 || (id == 10990 && BILLY_BOARDING == 1)) && gl_Normal.y == 0.0) {
+    // Billy Boarding: only diagonal faces; axis-aligned ones are drawn as they are.
+    if ((id == 10950 || id == 10952 ||
+         (id == 10990 && BILLY_BOARDING == 1 && all(greaterThan(abs(gl_Normal.xz), vec2(0.5)))))
+        && gl_Normal.y == 0.0) {
         // Keep one face of the cross pair to avoid double-layer artifacts
         if (sign(gl_Normal.xz) != vec2(1.0)) CULL
         float offset = (uv.x - mc_midTexCoord.x) * sign(at_tangent.w) * float(atlasSize.x) / 16.0;
         vec2 center = pos.xz - 1.8 * offset * normalize(at_tangent).xz * sign(at_tangent.w);
-        pos.xz = faceCamera(fwd.xz, offset, center);
+        // Billy Boarding layers: the face's offset from the block center along
+        // its normal becomes depth toward the camera (positive = in front).
+        float s = 0.0;
+        if (id == 10990) {
+            vec2 n = normalize(gl_Normal.xz);
+            s = dot(center - (pos.xz + mid.xz), n);
+            center -= s * n;
+        }
+        pos.xz = faceCamera(fwd.xz, offset, center) + s * normalize(fwd.xz);
 
         // Hanging propagule: flip UV vertically
         if (id == 10952) uv.y = 2.0 * mc_midTexCoord.y - uv.y;
