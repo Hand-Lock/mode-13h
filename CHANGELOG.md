@@ -5,6 +5,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+## [2.1.1] - 2026-09-29
+
 ### Added
 - Billy Boarding: potted cactus.
 - Billy Boarding: wall bells and pitcher crops.
