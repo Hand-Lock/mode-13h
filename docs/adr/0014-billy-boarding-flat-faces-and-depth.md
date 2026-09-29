@@ -24,8 +24,10 @@ the (+x,+z) one. Billy Boarding's ADR 0007 asks for more:
 - Every other 10990 face is drawn as it is, still with the alpha discard.
 - A billboarded face's offset from the block center along its normal becomes
   depth toward the camera (positive = in front). The face is recentered on
-  the block's axis as before, then pushed that far toward the viewer, so
-  layers keep their order from every side.
+  the block's axis as before, then moved toward the camera along the view
+  ray, in proportion to its offset. Its depth changes but its screen
+  position doesn't, so layers line up exactly and keep their order from
+  every side and pitch.
 - The block list uses `minecraft:bell` for all attachments and adds
   `minecraft:pitcher_crop`.
 
@@ -34,6 +36,6 @@ the (+x,+z) one. Billy Boarding's ADR 0007 asks for more:
 - Compatible both ways: a cross through the block center has zero depth
   and looks as before; older Mode 13h versions just cull the new flat faces.
 - An off-center diagonal face used to billboard around its own center; now
-  it billboards around the block's axis, pushed forward by its offset.
+  it billboards around the block's axis, moved forward by its offset.
 - Add-on authors get a plain rule: diagonal = billboard, anything else = as
   modeled, parallel layers = depth.

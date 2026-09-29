@@ -43,6 +43,7 @@ void main() {
     vec3 fwd = gbufferModelViewInverse[2].xyz;
     vec3 mid = at_midBlock / 64.0;
     float side = sign(uv.x - mc_midTexCoord.x);
+    float layer = 0.0;
 
     // Billboards stay perspective-correct.
     noAffine = int((id >= 10950 && id < 10990 && (id != 10956 || FLATTER_SIGNS == 1)) ||
@@ -81,13 +82,13 @@ void main() {
         vec2 center = f.xy;
         // Billy Boarding layers: the face's offset from the block center along
         // its normal becomes depth toward the camera (positive = in front).
-        float s = 0.0;
         if (id == 10990) {
             vec2 n = normalize(gl_Normal.xz);
-            s = dot(center - (pos.xz + mid.xz), n);
+            float s = dot(center - (pos.xz + mid.xz), n);
             center -= s * n;
+            layer = s;
         }
-        pos.xz = faceCamera(fwd.xz, offset, center) + s * normalize(fwd.xz);
+        pos.xz = faceCamera(fwd.xz, offset, center);
 
         // Hanging propagule: flip UV vertically
         if (id == 10952) uv.y = 2.0 * mc_midTexCoord.y - uv.y;
@@ -142,7 +143,9 @@ void main() {
         pos.xz = faceCamera(fwd.xz, 0.5 * side, pos.xz + mid.xz * sign(abs(gl_Normal.zx)));
     }
 
-    emitVertex(pos, uv);
+    // Billy Boarding layers: move along the view ray, which changes depth
+    // but not screen position, so layers keep their order from any angle.
+    emitView((gl_ModelViewMatrix * pos).xyz * (1.0 - 0.1 * layer), uv);
 
     // The face's UV rectangle for texmap(): mc_midTexCoord is its center.
     vec2 h = abs(uv - mc_midTexCoord);
