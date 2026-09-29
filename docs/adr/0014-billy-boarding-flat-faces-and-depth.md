@@ -49,6 +49,6 @@ the (+x,+z) one. Billy Boarding's ADR 0007 asks for more:
   looks as before; older Mode 13h versions just cull the new flat faces.
 - Layer offsets must be whole multiples of 0.05 px; others are rounded.
 - An off-center diagonal face used to billboard around its own center; now
-  it billboards around the block's axis, moved forward by its offset.
+  it billboards around the block's axis, moved forward by its depth rank.
 - Add-on authors get a plain rule: diagonal = billboard, anything else = as
   modeled, parallel layers = depth.
