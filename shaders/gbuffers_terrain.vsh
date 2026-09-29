@@ -10,6 +10,7 @@ attribute vec3 at_midBlock;
 
 uniform mat4  gbufferModelView;
 uniform mat4  gbufferModelViewInverse;
+uniform vec3  cameraPosition;
 uniform ivec2 atlasSize;
 uniform int   renderStage;
 
@@ -80,13 +81,15 @@ void main() {
         vec3 f = crossFace(pos.xz, uv, at_tangent);
         float offset = f.z;
         vec2 center = f.xy;
-        // Billy Boarding layers: the face's offset from the block center along
-        // its normal becomes depth toward the camera (positive = in front).
+        // Billy Boarding: turn around the block's axis, taken from the block
+        // grid (at_midBlock is truncated to 1/64 block, it only picks the
+        // block). The face's offset from it along its normal, in 0.05 px
+        // model steps (rescaled by the 45° cross), is its depth rank.
         if (id == 10990) {
-            vec2 n = normalize(gl_Normal.xz);
-            float s = dot(center - (pos.xz + mid.xz), n);
-            center -= s * n;
-            layer = s;
+            vec2 cam = fract((gbufferModelViewInverse * gl_ModelViewMatrix[3]).xz + cameraPosition.xz);
+            center = floor(pos.xz + mid.xz + cam) + 0.5 - cam;
+            layer = round(dot(pos.xz - center, normalize(gl_Normal.xz)) * 16.0 / (0.05 * sqrt(2.0)));
+            offset = round(offset * 16.0) / 16.0;
         }
         pos.xz = faceCamera(fwd.xz, offset, center);
 
@@ -143,9 +146,10 @@ void main() {
         pos.xz = faceCamera(fwd.xz, 0.5 * side, pos.xz + mid.xz * sign(abs(gl_Normal.zx)));
     }
 
-    // Billy Boarding layers: move along the view ray, which changes depth
-    // but not screen position, so layers keep their order from any angle.
-    emitView((gl_ModelViewMatrix * pos).xyz * (1.0 - 0.1 * layer), uv);
+    // Billy Boarding layers: 0.1% of the distance per rank along the view
+    // ray, which changes depth but not screen position, so layers keep their
+    // order from any angle.
+    emitView((gl_ModelViewMatrix * pos).xyz * (1.0 - 0.001 * layer), uv);
 
     // The face's UV rectangle for texmap(): mc_midTexCoord is its center.
     vec2 h = abs(uv - mc_midTexCoord);
