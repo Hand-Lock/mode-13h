@@ -8,6 +8,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 ### Added
 - Billy Boarding: potted pale oak sapling, eyeblossoms, golden dandelion and
   poplar sapling (1.21.4+, with the matching Billy Boarding).
+- Billboarded pale hanging moss (1.21.4+), golden dandelion (26.1+), red
+  shrub and poplar sapling (26.3+).
 
 ## [2.1.1] - 2026-09-29
 
