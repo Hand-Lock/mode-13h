@@ -5,6 +5,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+## [2.1.2] - 2026-09-29
+
 ### Added
 - Billy Boarding: potted pale oak sapling, eyeblossoms, golden dandelion and
   poplar sapling (1.21.4+, with the matching Billy Boarding).
