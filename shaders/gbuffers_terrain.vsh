@@ -12,6 +12,7 @@ uniform mat4  gbufferModelViewInverse;
 uniform ivec2 atlasSize;
 
 flat out int noAffine;
+flat out int billy;
 out vec4 uvRect;
 
 // Drop this vertex off screen (for the faces a billboard doesn't keep).
@@ -36,6 +37,7 @@ void main() {
     // Billboards stay perspective-correct.
     noAffine = int((id >= 10950 && id < 10990 && (id != 10956 || FLATTER_SIGNS == 1)) ||
                    (id == 10990 && BILLY_BOARDING == 1));
+    billy = int(id == 10990);
 
     // ---- Cross models: flora, hanging propagule, Billy Boarding ----
     if ((id == 10950 || id == 10952 || (id == 10990 && BILLY_BOARDING == 1)) && gl_Normal.y == 0.0) {

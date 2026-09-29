@@ -96,7 +96,7 @@ IDs 10950–10999 are reserved for billboards and add-ons (map at the top of
   continuation lines; nothing after a trailing `\`. Keep old and new block
   names side by side (Iris skips names the running version lacks).
 - Add-on contract (see SPEC.md): 10956 = sign cross-models from Flatter Signs
-  (`FLATTER_SIGNS`), 10990 = cross/hatch models from the Billy-Boarding
+  (`FLATTER_SIGNS`), 10990 = cross/hatch models from the Billy Boarding
   resource pack (`BILLY_BOARDING`). Don't renumber these; add-ons depend on
   them.
 

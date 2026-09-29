@@ -84,6 +84,6 @@ value.FLATTER_SIGNS.0=OFF
 value.FLATTER_SIGNS.1=ON
 
 option.BILLY_BOARDING=Billy Boarding
-option.BILLY_BOARDING.comment=Billboards cakes, flower pots, candles, sea pickles, brewing stands, anvils, bells, cacti, crops, fire, and soul fire. §eNeeds the Billy Boarding add-on!
+option.BILLY_BOARDING.comment=Billboards cakes, candle cakes, flower pots, brewing stands, anvils, bells, cacti, crops, fire, and soul fire. §eNeeds the Billy Boarding add-on!
 value.BILLY_BOARDING.0=OFF
 value.BILLY_BOARDING.1=ON

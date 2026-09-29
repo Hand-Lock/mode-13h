@@ -18,7 +18,7 @@ a block's model, only move its vertices.
   screen. Billboards skip affine mapping.
 - Blocks with non-cross models are converted by companion add-ons that swap
   their models for cross/hatch geometry: Flatter Signs (mod, ID 10956) and
-  Billy-Boarding (resource pack, ID 10990). Each has an off-by-default toggle.
+  Billy Boarding (resource pack, ID 10990). Each has an off-by-default toggle.
 
 ## Consequences
 

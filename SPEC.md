@@ -64,7 +64,7 @@ real hardware did.
   vanilla distance.
 - **Billboards.** Cross plants, cave vines, hanging propagules, amethyst,
   chains, torches, bamboo and lanterns are rewritten in the terrain vertex
-  shader into single camera-facing quads. Signs and Billy-Boarding blocks are
+  shader into single camera-facing quads. Signs and Billy Boarding blocks are
   opt-in.
 - **Hands.** Optional unlit "painted sprite" look (`HAND_FLATTEN`) and a 4×4
   ordered dither at macro-pixel scale (`HAND_DITHER`, strength, 0 = off).
@@ -74,7 +74,7 @@ real hardware did.
 
 Each item gets an ADR before it is implemented.
 
-- **R5 — Extended billboarding** through the Billy-Boarding resource pack.
+- **R5 — Extended billboarding** through the Billy Boarding resource pack.
 - **R6 — Flatter Signs on 1.21.1+** (separate repo, `Hand-Lock/flatter-signs`).
 - **R7 — Optional bespoke skybox** resource pack.
 
@@ -86,7 +86,9 @@ cross/hatch geometry so the terrain vertex shader can billboard them. ADR 0005.
 - IDs **10950–10999** in `block.properties` are reserved for billboards and
   add-ons.
 - **10956**: sign cross-models from Flatter Signs; toggle `FLATTER_SIGNS`.
-- **10990**: cross/hatch models from Billy-Boarding; toggle `BILLY_BOARDING`.
+- **10990**: cross/hatch models from Billy Boarding; toggle `BILLY_BOARDING`.
+  The list tracks the blocks Billy Boarding ships cross models for; a block
+  is added when its art lands.
 - Toggles default to off, because without the add-on these blocks have normal
   models and billboarding them would break them.
 - Changing or removing an add-on ID is a major version bump.

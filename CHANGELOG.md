@@ -5,6 +5,15 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+### Added
+- Billy Boarding: potted cactus.
+
+### Fixed
+- Billy Boarding no longer mangles candles, sea pickles and pitcher crops,
+  which it has no models for yet.
+- Billy Boarding: cakes, candle cakes, anvils and bells no longer show black
+  where their sprites are transparent.
+
 ## [2.1.0] - 2026-09-29
 
 ### Added

@@ -101,9 +101,9 @@ You can adjust things such as:
 
 Without the shader pack, those signs simply render as flat cross/hatch objects. With **Mode 13h** enabled, they become proper DOS-style billboarded signs.
 
-### 🧱 Billy-Boarding *(WIP)*
+### 🧱 Billy Boarding *(WIP)*
 
-**Billy-Boarding** is a resource pack that changes the **`.json` block models** of selected blocks so they become **cross/hatch-based** and therefore compatible with the shader’s billboarding system.
+**Billy Boarding** is a resource pack that changes the **`.json` block models** of selected blocks so they become **cross/hatch-based** and therefore compatible with the shader’s billboarding system.
 
 If you install these add-ons, you can enable or disable their dedicated support from the **shader configuration screen**.
 
