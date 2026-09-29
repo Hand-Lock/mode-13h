@@ -92,6 +92,9 @@ cross/hatch geometry so the terrain vertex shader can billboard them. ADR 0005.
   depth toward the camera, so layered crosses stay apart. Other faces are
   drawn as they are, with the alpha discard. The list tracks the blocks Billy
   Boarding ships cross models for; a block is added when its art lands.
+  Falling blocks carry no ID, so their diagonal faces billboard whenever they
+  exist, around their own center and without depth (ADR 0015). Known gap:
+  blocks moved by pistons stay static crosses.
 - Toggles default to off, because without the add-on these blocks have normal
   models and billboarding them would break them.
 - Changing or removing an add-on ID is a major version bump.

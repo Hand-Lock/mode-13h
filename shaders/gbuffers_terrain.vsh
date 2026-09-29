@@ -8,8 +8,10 @@ attribute vec4 at_tangent;
 attribute vec2 mc_midTexCoord;
 attribute vec3 at_midBlock;
 
+uniform mat4  gbufferModelView;
 uniform mat4  gbufferModelViewInverse;
 uniform ivec2 atlasSize;
+uniform int   renderStage;
 
 flat out int noAffine;
 flat out int billy;
@@ -26,6 +28,14 @@ vec2 faceCamera(vec2 fwd, float offset, vec2 center) {
     return center + offset * vec2(v.y, -v.x);
 }
 
+// One face of a cross model: its center (xy) on the two horizontal axes of
+// `p`, and this vertex's offset from it along the face (z). `t` is the
+// tangent in the same space as `p`.
+vec3 crossFace(vec2 p, vec2 uv, vec4 t) {
+    float offset = (uv.x - mc_midTexCoord.x) * sign(t.w) * float(atlasSize.x) / 16.0;
+    return vec3(p - 1.8 * offset * normalize(t).xz * sign(t.w), offset);
+}
+
 void main() {
     int id = int(mc_Entity.x + 0.5);
     vec2 uv = vertexUV();
@@ -39,6 +49,26 @@ void main() {
                    (id == 10990 && BILLY_BOARDING == 1));
     billy = int(id == 10990);
 
+#ifdef MC_RENDER_STAGE_ENTITIES
+    // ---- Falling blocks ----
+    // Drawn here through gbuffers_block in the entity stage, without a block
+    // ID or at_midBlock, and not in world-aligned model space. Billboard their
+    // diagonal faces (Billy Boarding anvils, pointed dripstone) in player space.
+    if (renderStage == MC_RENDER_STAGE_ENTITIES) {
+        mat3 toPlayer = mat3(gbufferModelViewInverse) * mat3(gl_ModelViewMatrix);
+        vec3 n = toPlayer * gl_Normal;
+        if (abs(n.y) < 0.1 && all(greaterThan(abs(n.xz), vec2(0.5)))) {
+            if (sign(n.xz) != vec2(1.0)) CULL
+            vec3 p = (gbufferModelViewInverse * (gl_ModelViewMatrix * gl_Vertex)).xyz;
+            vec3 f = crossFace(p.xz, uv, vec4(toPlayer * at_tangent.xyz, at_tangent.w));
+            p.xz = faceCamera(fwd.xz, f.z, f.xy);
+            noAffine = 1;
+            emitView((gbufferModelView * vec4(p, 1.0)).xyz, uv);
+            return;  // uvRect is unused when noAffine
+        }
+    }
+#endif
+
     // ---- Cross models: flora, hanging propagule, Billy Boarding ----
     // Billy Boarding: only diagonal faces; axis-aligned ones are drawn as they are.
     if ((id == 10950 || id == 10952 ||
@@ -46,8 +76,9 @@ void main() {
         && gl_Normal.y == 0.0) {
         // Keep one face of the cross pair to avoid double-layer artifacts
         if (sign(gl_Normal.xz) != vec2(1.0)) CULL
-        float offset = (uv.x - mc_midTexCoord.x) * sign(at_tangent.w) * float(atlasSize.x) / 16.0;
-        vec2 center = pos.xz - 1.8 * offset * normalize(at_tangent).xz * sign(at_tangent.w);
+        vec3 f = crossFace(pos.xz, uv, at_tangent);
+        float offset = f.z;
+        vec2 center = f.xy;
         // Billy Boarding layers: the face's offset from the block center along
         // its normal becomes depth toward the camera (positive = in front).
         float s = 0.0;

@@ -15,6 +15,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 - Billy Boarding potted plants no longer z-fight.
 - Billy Boarding: cakes, candle cakes, anvils and bells no longer show black
   where their sprites are transparent.
+- Falling Billy Boarding anvils and falling pointed dripstone now face the
+  camera.
 
 ## [2.1.0] - 2026-09-29
 

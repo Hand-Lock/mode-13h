@@ -17,18 +17,23 @@ vec2 vertexUV() {
     return (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 }
 
-// Fill the varyings and gl_Position from a model-space vertex and its UV.
-void emitVertex(vec4 vertex, vec2 uv) {
+// Fill the varyings and gl_Position from a view-space position and its UV.
+void emitView(vec3 view, vec2 uv) {
     texcoord    = uv;
     lmcoord     = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;
     vColor      = gl_Color;
-    viewPos     = (gl_ModelViewMatrix * vertex).xyz;
+    viewPos     = view;
     gl_Position = gl_ProjectionMatrix * vec4(viewPos, 1.0);
 #if (DOS_TEXMAP == 1)
     uvq = vec3(uv, 1.0) / gl_Position.w;
 #else
     uvq = vec3(uv, 1.0);
 #endif
+}
+
+// Same, from a model-space vertex.
+void emitVertex(vec4 vertex, vec2 uv) {
+    emitView((gl_ModelViewMatrix * vertex).xyz, uv);
 }
 
 void emitVertex() {
