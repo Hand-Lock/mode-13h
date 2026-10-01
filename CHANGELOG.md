@@ -5,6 +5,9 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+### Fixed
+- Wall torches no longer stretch sideways on 1.21.11 and 26.x.
+
 ## [2.2.0] - 2026-10-01
 
 ### Changed

@@ -141,9 +141,12 @@ void main() {
     }
 
     // ---- Wall torches ----
+    // Half-width from the face itself: older models are 16 px planes, newer
+    // ones a 2 px box (plus 3 px redstone glow faces).
     else if (id == 10970) {
         if (gl_Normal.y > -0.1 || gl_Normal.y < -0.7) CULL
-        pos.xz = faceCamera(fwd.xz, 0.5 * side, pos.xz + mid.xz * sign(abs(gl_Normal.zx)));
+        vec2 axis = sign(abs(gl_Normal.zx));
+        pos.xz = faceCamera(fwd.xz, side * dot(abs(mid.xz), axis), pos.xz + mid.xz * axis);
     }
 
     // Billy Boarding layers: 0.1% of the distance per rank along the view
