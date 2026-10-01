@@ -6,7 +6,7 @@
 
 ![A screenshot of a Minecraft daytime scene with the shader pack.](https://cdn.modrinth.com/data/cached_images/7f88226fae022bc760918a14c467a6762b129cd6.png)
 
-**Mode 13h: MS-DOSify!** is not just a generic “pixelation” shader. It aims to reproduce the actual visual limitations and quirks that gave old DOS-era 3D games their unmistakable look: low resolution, wobbly software texture mapping, a fixed 256-color palette, colormap lighting, billboarded sprites, and carefully tuned fog.
+**Mode 13h: MS-DOSify!** is not just a generic “pixelation” shader. It aims to reproduce the actual visual limitations and quirks that gave old DOS-era 3D games their unmistakable look: low resolution, wobbly software texture mapping, a fixed 256-color palette, colormap lighting, billboarded sprites, and vanilla-accurate fog.
 
 It supports the long-term Minecraft versions **`1.20.1`, `1.21.1` and `1.21.11`** with **Iris** or **Oculus**; every release is tested on all three. **26.x** and other versions are **best-effort**.
 
@@ -47,14 +47,14 @@ A lot of “retro” shaders stop at chunky pixels and call it a day.
 - Textures only use palette colors, and shadows **step down each color's ramp** instead of dimming smoothly — just like the colormaps of **Doom** and **Quake**.
 - Light is **quantized** into configurable brightness steps; **16** matches vanilla Minecraft’s light levels.
 
-### 🌫️ Tuned fog
+### 🌫️ Vanilla-accurate fog
 
-- Fog follows vanilla on each Minecraft version but starts at **half the vanilla distance** by default, selling depth the way older games did.
-- **Start** and **End** scales in the menu let you push it thicker or back to vanilla.
+- Fog **matches vanilla** on each Minecraft version (curve, distance shape, render-distance fog), and clouds fade out like vanilla's.
+- **Start** and **End** scales push it thicker or farther; set Start to `0.50` for the denser fog of 2.x.
 
 ### 🪧 Billboarded sprites
 
-- Flowers and grass, torches, lanterns, chains, amethyst, bamboo and hanging propagules render as **2D billboards** that always face the player.
+- Flowers, grass and saplings, mushrooms, kelp, seagrass and coral, cave vines, sugar cane, pointed dripstone, torches, lanterns, chains, amethyst, bamboo and hanging propagules render as **2D billboards** that always face the player.
 - This mimics the sprite-based tricks commonly used in older 3D games.
 - Signs and more blocks can billboard too, with the add-ons below.
 
@@ -87,7 +87,7 @@ You can adjust things such as:
 - Supported: **Minecraft `1.20.1`, `1.21.1` and `1.21.11`**, tested before every release. **26.x** and other versions are best-effort.
 - Targets **OpenGL `4.1`**, so it can also run on **macOS**.
 - **Lightweight:** a handful of geometry passes and one final pass, no composites.
-- **Upgrading from 1.x:** settings for removed or renamed options reset to their defaults.
+- **Upgrading from an older major version:** settings for removed or renamed options reset to their defaults.
 
 ## 🧩 Add-ons
 
