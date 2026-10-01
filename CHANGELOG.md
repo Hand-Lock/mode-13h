@@ -5,6 +5,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-10-01
+
 ### Added
 - Golden Days option: seagrass no longer tears across the screen, and
   hanging mangrove propagules keep Golden Days' look.
