@@ -26,9 +26,11 @@
 #define DOS_SPAN  16 // [8 16 32]
 
 /* ===== Fog =====
-   Multipliers on vanilla fog distances; 1.00 is vanilla. */
+   Multipliers on vanilla fog distances; 1.00 is vanilla. Cloud distance in
+   chunks, to match the video setting (Iris doesn't pass it). */
 #define FOG_START_SCALE   0.50 // [0.25 0.50 0.75 1.00 1.25 1.50 2.00 3.00]
 #define FOG_END_SCALE     1.00 // [0.25 0.50 0.75 1.00 1.25 1.50 2.00 3.00]
+#define CLOUD_DISTANCE    128  // [2 4 8 12 16 24 32 48 64 96 128]
 
 /* ===== Hands ===== */
 #define HAND_FLATTEN 1    // [0 1]

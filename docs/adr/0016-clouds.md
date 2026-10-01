@@ -13,7 +13,7 @@ differs per version:
 | < 1.21 | terrain fog, spherical, blend to fog color | Sodium's cloud range (end = cloud distance · 8, start = end − 16), not the terrain fog |
 | 1.21–1.21.1 | terrain fog, view-space cylinder (`FogShape`), blend to fog color | world fog; clouds.png textured |
 | 1.21.2–1.21.5 | terrain fog, world-aligned cylinder (`FogShape`), blend to fog color | world fog |
-| ≥ 1.21.6 | `α *= 1 − linear(d, 0, cloudEnd)`, no fog color; cloudEnd = 2048, or the environmental fog end in water, lava, powder snow, blindness or darkness | environmental fog; face colors with α 0.8 times CloudColor's α 0.8 |
+| ≥ 1.21.6 | `α *= 1 − linear(d, 0, cloudEnd)`, no fog color; cloudEnd = Cloud Distance · 16 (capped at 2048 from 1.21.11), or the environmental fog end in water, lava, powder snow, blindness or darkness | environmental fog; face colors with α 0.8 times CloudColor's α 0.8 |
 
 On 1.21.1 clouds don't render at all with any pack. Sodium 0.8 replaces the
 vanilla cloud renderer with its own `clouds` shader. Iris 1.7 (1.20.1)
@@ -31,7 +31,11 @@ not disable Sodium's cloud renderer, so the unknown shader is skipped
   start = end/4, darkness toward 15 with start = 0.75·end. Under water, lava
   or powder snow Sodium matches vanilla, so Iris's range is used. Nether
   thick fog is skipped: the dimensions that have it draw no clouds.
-- On 1.21.6+, divide α by 0.8 to undo Iris's duplicate, then fade alpha.
+- On 1.21.6+, divide α by 0.8 to undo Iris's duplicate, then fade alpha
+  to cloudEnd = min(CLOUD_DISTANCE · 16, 2048). Iris has no uniform for
+  the Cloud Distance video setting (2–128 chunks), so the player mirrors
+  it in our menu; the default 128 is vanilla's default. The slider tops
+  out at 2048 blocks, so the cap is also right before 1.21.11.
 - Keep the texture sample (needed on the textured vanilla path), vertex
   color as the only shading, no lightmap, alpha test before fog.
 - Leave 1.21.1 unpatched: it is an Iris bug outside the pack. The
@@ -43,5 +47,6 @@ not disable Sodium's cloud renderer, so the unknown shader is skipped
 
 - Clouds look like vanilla's on every version that draws them: fog-colored
   at the render-distance edge before 1.21.6, faded into the sky after.
-- The 2048-block cloud end ignores a changed Cloud Range option, which Iris
-  doesn't expose.
+- A changed Cloud Distance only matches if the player also changes
+  CLOUD_DISTANCE. Before 1.21.6 the option does nothing: clouds take the
+  terrain fog there.

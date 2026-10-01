@@ -59,14 +59,15 @@ terrain, entities, hand, particles, weather    → textured_lit
 water, block, damagedblock                     → terrain
 entities_glowing                               → entities
 hand_water                                     → hand
+lightning                                      → entities
 skytextured, clouds, spidereyes,
   beaconbeam, armor_glint                      → textured
 skybasic, line                                 → basic
 ```
 
 The pack ships basic, textured, terrain, water, entities, hand, clouds,
-skytextured and spidereyes; everything else, particles and rain included,
-falls through to one of them.
+skytextured, spidereyes, armor_glint and lightning; everything else,
+particles and rain included, falls through to one of them.
 
 Never add a program whose code equals its fallback. Add one only when it must
 behave differently.

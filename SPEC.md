@@ -62,6 +62,7 @@ real hardware did.
 - **Fog.** Vanilla fog and cloud fog of the running Minecraft version (curve,
   cylinder distance, render-distance fog), scaled by `FOG_START_SCALE` and
   `FOG_END_SCALE`; the default starts fog at half the vanilla distance.
+  `CLOUD_DISTANCE` mirrors the video setting, which Iris doesn't pass.
   ADR 0016, ADR 0017.
 - **Billboards.** Cross plants, cave vines, hanging propagules, amethyst,
   chains, torches, bamboo and lanterns are rewritten in the terrain vertex

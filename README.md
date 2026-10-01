@@ -77,7 +77,7 @@ You can adjust things such as:
 - **Palette**: ramp, stock VGA, RGB332, `6 x 6 x 6`, Mac OS, seven classic game palettes, or off
 - **Colormap lighting**, **light steps** and **ambient floor**
 - **Texture mapping**: subdivided, affine or perspective-correct, and the span width
-- **Fog** start and end
+- **Fog** start and end, and **Cloud Distance** (match your video setting on 1.21.6+)
 - **Hands**: flat sprite look and dithering strength
 - **Add-on compatibility toggles**, which can be enabled or disabled individually
 

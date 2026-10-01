@@ -38,8 +38,9 @@ void main() {
 #else
     // Iris's face colors repeat CloudColor's α 0.8; vanilla has it once.
     c.a /= 0.8;
-    // Fade out, no fog color.
-    c.a *= 1.0 - fogRamp(length(viewPos), 0.0, fogSpecial() ? fogEnd : 2048.0);
+    // Fade out by the cloud distance, no fog color.
+    c.a *= 1.0 - fogRamp(length(viewPos), 0.0, fogSpecial() ? fogEnd
+                               : min(float(CLOUD_DISTANCE) * 16.0, 2048.0));
 #endif
     out0 = c;
 }

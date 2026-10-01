@@ -5,6 +5,10 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+### Added
+- Cloud Distance option: match your video setting so clouds fade out like
+  vanilla (1.21.6+).
+
 ### Changed
 - Clouds and fog follow vanilla on each Minecraft version (curve, cylinder
   distance, render-distance fog, cloud fade).
@@ -13,6 +17,11 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 - Wall torches no longer stretch sideways on 1.21.11 and 26.x.
 - Clouds on 1.21.11 and 26.x were too transparent.
 - Stars and the sunset glow are never fogged, like vanilla.
+- The void below the horizon is fogged like vanilla on 1.21.6+.
+- Enchantment glint and lightning fade out with distance and glint ignores
+  light, like vanilla.
+- Glowing eyes fade out with distance before 1.21.2, like vanilla.
+- The world border is no longer fogged.
 
 ### Removed
 - Fog Density Scale: vanilla fog is never exponential.

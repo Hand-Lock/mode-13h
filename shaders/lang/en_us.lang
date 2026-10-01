@@ -57,6 +57,9 @@ option.FOG_START_SCALE.comment=Multiplier for the distance where fog starts.
 option.FOG_END_SCALE=End Scale
 option.FOG_END_SCALE.comment=Multiplier for the distance where fog is solid.
 
+option.CLOUD_DISTANCE=Cloud Distance
+option.CLOUD_DISTANCE.comment=Set to your Video Settings Cloud Distance, in chunks (1.21.6+). Clouds fade out by this distance.
+
 # ===== Hands =====
 
 screen.HANDS=Hands & Held Items

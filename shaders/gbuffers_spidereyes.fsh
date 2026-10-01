@@ -15,6 +15,11 @@ void main() {
     if (c.a <= 0.0) discard;
 
     c.rgb = mix(c.rgb, entityColor.rgb, entityColor.a);
+#if MC_VERSION < 12102
+    // Emissive layers fade out before 1.21.2, then blend to the fog color.
+    c *= 1.0 - fogFactor(viewPos);
+#else
     c.rgb = applyFog(c.rgb, viewPos);
+#endif
     out0 = c;
 }
