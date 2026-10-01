@@ -109,4 +109,4 @@ modern effect a 1990s software renderer couldn't do.
 
 - Modrinth project `X5nQ5C2A` (slug `mode-13h`), shader type, loader `iris`.
 - GitHub `Hand-Lock/mode-13h`, one release per tag `vX.Y.Z`.
-- License AGPL-3.0-only. Author HandLock_.
+- License AGPL-3.0-or-later. Author HandLock_.

@@ -1,4 +1,4 @@
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://github.com/Hand-Lock/mode-13h/blob/main/LICENSE)
+[![License: AGPL v3+](https://img.shields.io/badge/License-AGPL%20v3%2B-blue.svg)](https://github.com/Hand-Lock/mode-13h/blob/main/LICENSE)
 
 # Mode 13h: MS-DOSify!
 
@@ -113,7 +113,7 @@ If you install these add-ons, you can enable or disable their dedicated support 
 
 For the best overall presentation, it is recommended to pair **Mode 13h** with a **stylized skybox**.
 
-At the moment, the recommended choice is [**Anime Sky**](https://modrinth.com/resourcepack/anime-sky).
+At the moment, the recommended choice is [**Better Sky**](https://modrinth.com/resourcepack/bettersky). It uses the OptiFine sky format, so it needs the mods [**Nuit**](https://modrinth.com/mod/nuit) and [**Nuit Interop**](https://modrinth.com/mod/nuit-interop).
 
 A bespoke skybox made specifically for **Mode 13h** may come in the future.
 
@@ -128,6 +128,8 @@ A bespoke skybox made specifically for **Mode 13h** may come in the future.
 ## 🖇️ Credits
 
 - **Shader pack & idea:** *HandLock_*
+
+Licensed under [AGPL-3.0-or-later](https://github.com/Hand-Lock/mode-13h/blob/main/LICENSE).
 
 ## 🛠️ Development
 

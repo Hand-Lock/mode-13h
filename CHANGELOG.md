@@ -5,6 +5,10 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+### Changed
+- Ambient Floor defaults to 0.00: darkness now matches vanilla.
+- License is now AGPL-3.0-or-later.
+
 ## [2.1.2] - 2026-09-29
 
 ### Added
