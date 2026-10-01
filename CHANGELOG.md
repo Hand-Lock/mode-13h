@@ -5,6 +5,9 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+### Changed
+- Clouds fade out with distance like vanilla instead of turning fog-colored.
+
 ### Fixed
 - Wall torches no longer stretch sideways on 1.21.11 and 26.x.
 

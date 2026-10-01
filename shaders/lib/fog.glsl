@@ -31,11 +31,15 @@ float fogFactor(float d) {
     return clamp((d - mid) / range + 0.5, 0.0, 1.0);
 }
 
-vec3 applyFog(vec3 rgb, vec3 viewPos) {
-    float d = fogShape == 1
+// Distance from the camera, spherical or cylindrical like vanilla.
+float fogDistance(vec3 viewPos) {
+    return fogShape == 1
         ? length((mat3(gbufferModelViewInverse) * viewPos).xz)
         : length(viewPos);
-    return mix(rgb, fogColor, fogFactor(d));
+}
+
+vec3 applyFog(vec3 rgb, vec3 viewPos) {
+    return mix(rgb, fogColor, fogFactor(fogDistance(viewPos)));
 }
 
 #endif
