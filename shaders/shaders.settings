@@ -39,3 +39,4 @@
 /* ===== Add-on Toggles ===== */
 #define FLATTER_SIGNS  0 // [0 1]
 #define BILLY_BOARDING 0 // [0 1]
+#define GOLDEN_DAYS    0 // [0 1]

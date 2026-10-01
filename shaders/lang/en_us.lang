@@ -87,3 +87,8 @@ option.BILLY_BOARDING=Billy Boarding
 option.BILLY_BOARDING.comment=Billboards cakes, candle cakes, flower pots, brewing stands, anvils, bells, cacti, crops, fire, and soul fire. §eNeeds the Billy Boarding add-on!
 value.BILLY_BOARDING.0=OFF
 value.BILLY_BOARDING.1=ON
+
+option.GOLDEN_DAYS=Golden Days
+option.GOLDEN_DAYS.comment=Draws seagrass and hanging mangrove propagules as Golden Days' cross models. §eNeeds the Golden Days resource pack!
+value.GOLDEN_DAYS.0=OFF
+value.GOLDEN_DAYS.1=ON

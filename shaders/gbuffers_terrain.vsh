@@ -39,6 +39,11 @@ vec3 crossFace(vec2 p, vec2 uv, vec4 t) {
 
 void main() {
     int id = int(mc_Entity.x + 0.5);
+#if GOLDEN_DAYS == 1
+    // Golden Days: seagrass is a plain cross, and the hanging propagule is
+    // a sapling cross already turned upside down (no UV flip).
+    if (id == 10952 || id == 10962) id = 10950;
+#endif
     vec2 uv = vertexUV();
     vec4 pos = gl_Vertex;
     vec3 fwd = gbufferModelViewInverse[2].xyz;
