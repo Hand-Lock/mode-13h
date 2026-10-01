@@ -44,6 +44,11 @@ void main() {
     // a sapling cross already turned upside down (no UV flip).
     if (id == 10952 || id == 10962) id = 10950;
 #endif
+#if GOLDEN_DAYS_CANDLES == 1
+    // Golden Days' flat candles: one small cross per candle; the cross
+    // path billboards each around its own center.
+    if (id == 10991) id = 10950;
+#endif
     vec2 uv = vertexUV();
     vec4 pos = gl_Vertex;
     vec3 fwd = gbufferModelViewInverse[2].xyz;

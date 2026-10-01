@@ -8,6 +8,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 ### Added
 - Golden Days option: seagrass no longer tears across the screen, and
   hanging mangrove propagules keep Golden Days' look.
+- Golden Days 2D Candles option: billboards Golden Days' flat candles, each
+  one on its own.
 
 ## [3.0.0] - 2026-10-01
 

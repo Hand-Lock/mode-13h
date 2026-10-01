@@ -92,3 +92,8 @@ option.GOLDEN_DAYS=Golden Days
 option.GOLDEN_DAYS.comment=Draws seagrass and hanging mangrove propagules as Golden Days' cross models. §eNeeds the Golden Days resource pack!
 value.GOLDEN_DAYS.0=OFF
 value.GOLDEN_DAYS.1=ON
+
+option.GOLDEN_DAYS_CANDLES=Golden Days 2D Candles
+option.GOLDEN_DAYS_CANDLES.comment=Billboards candles, each one around its own wick. §eNeeds Golden Days with its Flat Candles option (Polytone)!
+value.GOLDEN_DAYS_CANDLES.0=OFF
+value.GOLDEN_DAYS_CANDLES.1=ON

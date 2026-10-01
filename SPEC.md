@@ -102,7 +102,12 @@ cross/hatch geometry so the terrain vertex shader can billboard them. ADR 0005.
   ships seagrass and the hanging mangrove propagule as plain crosses (the
   propagule already upside down), so both are drawn as 10950 crosses.
   GD's Polytone-only options (cuboid bamboo, picture-perfect signs) are not
-  supported. Load Billy Boarding above GD. ADR 0021.
+  supported, except flat candles (below). Load Billy Boarding above GD.
+  ADR 0021.
+- **10991**: candles; toggle `GOLDEN_DAYS_CANDLES`, off by default. Needs
+  GD's Flat Candles option (Polytone), which makes each candle its own small
+  cross; remapped to 10950, so each candle turns around its own wick and
+  flames stay on it. Candle cakes stay Billy Boarding's (10990). ADR 0022.
 - Toggles default to off, because without the add-on these blocks have normal
   models and billboarding them would break them.
 - Changing or removing an add-on ID is a major version bump.
