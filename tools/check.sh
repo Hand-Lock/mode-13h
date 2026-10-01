@@ -38,6 +38,9 @@ STUBS='#define MC_VERSION 12001
 #define IS_IRIS
 #define MC_GL_VERSION 410
 #define MC_GLSL_VERSION 410
+#define MC_RENDER_STAGE_SKY 1
+#define MC_RENDER_STAGE_SUNSET 2
+#define MC_RENDER_STAGE_STARS 6
 #define MC_RENDER_STAGE_ENTITIES 11'
 
 # compile FILE LABEL: compile an inlined program; the stage comes from LABEL.

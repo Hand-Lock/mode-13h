@@ -59,9 +59,10 @@ real hardware did.
   perspective-correct. ADR 0007.
 - **Texture LOD.** Mip selection is biased by `log2(DOS_SCALE)`, so textures
   are filtered for the 320×200 output instead of shimmering. ADR 0009.
-- **Fog.** Vanilla fog curves and shapes, scaled by `FOG_START_SCALE`,
-  `FOG_END_SCALE` and `FOG_DENSITY_SCALE`; the default starts fog at half the
-  vanilla distance.
+- **Fog.** Vanilla fog and cloud fog of the running Minecraft version (curve,
+  cylinder distance, render-distance fog), scaled by `FOG_START_SCALE` and
+  `FOG_END_SCALE`; the default starts fog at half the vanilla distance.
+  ADR 0016, ADR 0017.
 - **Billboards.** Cross plants, cave vines, hanging propagules, amethyst,
   chains, torches, bamboo and lanterns are rewritten in the terrain vertex
   shader into single camera-facing quads. Signs and Billy Boarding blocks are

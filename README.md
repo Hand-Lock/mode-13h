@@ -49,8 +49,8 @@ A lot of “retro” shaders stop at chunky pixels and call it a day.
 
 ### 🌫️ Tuned fog
 
-- Fog keeps vanilla's shapes and curves but starts at **half the vanilla distance** by default, selling depth the way older games did.
-- **Start**, **End** and **Density** scales in the menu let you push it thicker or back to vanilla.
+- Fog follows vanilla on each Minecraft version but starts at **half the vanilla distance** by default, selling depth the way older games did.
+- **Start** and **End** scales in the menu let you push it thicker or back to vanilla.
 
 ### 🪧 Billboarded sprites
 
@@ -77,7 +77,7 @@ You can adjust things such as:
 - **Palette**: ramp, stock VGA, RGB332, `6 x 6 x 6`, Mac OS, seven classic game palettes, or off
 - **Colormap lighting**, **light steps** and **ambient floor**
 - **Texture mapping**: subdivided, affine or perspective-correct, and the span width
-- **Fog** start, end and density
+- **Fog** start and end
 - **Hands**: flat sprite look and dithering strength
 - **Add-on compatibility toggles**, which can be enabled or disabled individually
 

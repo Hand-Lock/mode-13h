@@ -6,10 +6,16 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 ## [Unreleased]
 
 ### Changed
-- Clouds fade out with distance like vanilla instead of turning fog-colored.
+- Clouds and fog follow vanilla on each Minecraft version (curve, cylinder
+  distance, render-distance fog, cloud fade).
 
 ### Fixed
 - Wall torches no longer stretch sideways on 1.21.11 and 26.x.
+- Clouds on 1.21.11 and 26.x were too transparent.
+- Stars and the sunset glow are never fogged, like vanilla.
+
+### Removed
+- Fog Density Scale: vanilla fog is never exponential.
 
 ## [2.2.0] - 2026-10-01
 

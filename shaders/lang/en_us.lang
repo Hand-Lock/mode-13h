@@ -57,9 +57,6 @@ option.FOG_START_SCALE.comment=Multiplier for the distance where fog starts.
 option.FOG_END_SCALE=End Scale
 option.FOG_END_SCALE.comment=Multiplier for the distance where fog is solid.
 
-option.FOG_DENSITY_SCALE=Density Scale
-option.FOG_DENSITY_SCALE.comment=Multiplier for the density of exponential fog (underwater, lava, blindness...).
-
 # ===== Hands =====
 
 screen.HANDS=Hands & Held Items
