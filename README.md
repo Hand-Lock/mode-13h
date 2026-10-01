@@ -145,6 +145,10 @@ Clouds fade out at *Video Settings → Cloud Distance*. Shaders can't read that 
 
 Before 1.21.6, clouds fog at the render distance like terrain, and the option does nothing.
 
+### Enchanted items look dark in the hotbar on 26.2
+
+This is an Iris bug on 26.2 and happens with **every** shader pack ([Iris #3348](https://github.com/IrisShaders/Iris/issues/3348)). Hotbar and inventory items are drawn after the world with vanilla's own shaders, so no shader pack code runs on them and Mode 13h can't fix it. It goes away when Iris fixes it.
+
 ### What is the Ramp palette, and how do the palettes differ?
 
 - **Ramp** (default): built for this pack. It has 16 Minecraft hues (gray, stone, dirt, wood, sand, grass, foliage, water, sky, red, lava, gold, amethyst, skin, diamond, crimson), each in 16 shades from black to near-white, like Quake's palette. Colormap lighting steps down these ramps, so it keeps Minecraft's colors best.

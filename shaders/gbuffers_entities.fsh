@@ -17,6 +17,7 @@ void main() {
 
     c.rgb *= applyLightmap(lmcoord);
     c.rgb  = mix(c.rgb, entityColor.rgb, entityColor.a);
+    c.rgb += inlineGlint();
     c.rgb  = applyFog(c.rgb, viewPos);
     out0 = c;
 }

@@ -22,6 +22,7 @@ void main() {
 #if (HAND_FLATTEN == 0)
     c.rgb *= applyLightmap(lmcoord);
 #endif
+    c.rgb += inlineGlint();
 
     c.rgb = applyFog(c.rgb, viewPos);
 

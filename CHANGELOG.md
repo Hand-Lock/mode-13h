@@ -25,6 +25,7 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
   light, like vanilla.
 - Glowing eyes fade out with distance before 1.21.2, like vanilla.
 - The world border is no longer fogged.
+- Enchantment glint on held, dropped and worn items on Minecraft 26.3.
 
 ### Removed
 - Fog Density Scale: vanilla fog is never exponential.

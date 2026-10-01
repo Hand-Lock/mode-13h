@@ -34,4 +34,16 @@ vec3 applyLightmap(vec2 lmuv) {
     return lm;
 }
 
+// 26.3+ draws the enchantment glint inside the item's own draw, and Iris
+// hands it over as mc_sampleGlint() instead of running armor_glint.
+// Vanilla adds it squared (BlendFunction.GLINT), after light, before fog.
+vec3 inlineGlint() {
+#ifdef IRIS_INLINE_GLINT
+    vec3 g = mc_sampleGlint();
+    return g * g;
+#else
+    return vec3(0.0);
+#endif
+}
+
 #endif
