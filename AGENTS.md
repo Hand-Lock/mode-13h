@@ -13,8 +13,8 @@ architecture, look or compatibility.
 - Nothing from GL ≥ 4.2: no compute, SSBOs, image load/store,
   `layout(binding=)`, `textureQueryLevels`. macOS caps at 4.1.
 - Iris and Oculus only. No OptiFine-specific code or claims.
-- Must compile and run on Minecraft **1.20.1** and **1.21.1**. Newer versions
-  are best-effort.
+- Must compile and run on Minecraft **1.20.1**, **1.21.1** and **1.21.11**.
+  Other versions, 26.x included, are best-effort.
 - Be cheap. Prefer the simplest technique whose result is indistinguishable.
 - Emulate the signal, not the monitor: no CRT, scanlines, bloom or aspect
   correction. The player stretches to 4:3 themselves.
@@ -134,8 +134,9 @@ sh -c '. ./.local.env; IFS=:; for d in $MC_DIRS; do
 (`sh -c` because zsh doesn't split `$MC_DIRS` on `IFS`.)
 
 `.local.env` is gitignored and holds `MC_DIRS`, a colon-separated list of
-`.minecraft` directories of the dev instances (1.20.1 and 1.21.1). If it is
-missing, ask the user for the paths and write it.
+`.minecraft` directories of the dev instances: 1.20.1, 1.21.1 and 1.21.11,
+plus a 26.x one for best-effort checks. If it is missing, ask the user for the
+paths and write it.
 
 The dev instances load this repo as `shaderpacks/mode-13h-dev/`, a real folder
 holding one symlink, `shaders`, to the repo's `shaders/`. Don't symlink the
@@ -149,7 +150,7 @@ Only when the user says **release**. Never on your own initiative.
 1. Pick the SemVer bump: patch = fixes and block-list additions; minor = new
    features or visible look changes; major = removed/renamed options or a
    changed add-on ID contract.
-2. Ask whether both 1.20.1 and 1.21.1 were tested in-game, unless the user
+2. Ask whether 1.20.1, 1.21.1 and 1.21.11 were all tested in-game, unless the user
    already said so. Their word is enough.
 3. In `CHANGELOG.md`, rename `## [Unreleased]` to `## [X.Y.Z] - YYYY-MM-DD`
    and add a fresh empty `## [Unreleased]` above it. Commit and push.

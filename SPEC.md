@@ -32,8 +32,8 @@ real hardware did.
 |---|---|
 | Iris (Fabric/NeoForge), Oculus (Forge) | Supported |
 | OptiFine | Not supported |
-| Minecraft 1.20.1, 1.21.1 | Mandatory: tested in-game before every release |
-| Minecraft 1.21.2 – 1.21.11, 26.x | Best-effort |
+| Minecraft 1.20.1, 1.21.1, 1.21.11 | Mandatory: tested in-game before every release |
+| Minecraft 1.21.2 – 1.21.10, 26.x, others | Best-effort |
 | GLSL | `#version 410 compatibility`, the ceiling for macOS |
 
 ## Current features

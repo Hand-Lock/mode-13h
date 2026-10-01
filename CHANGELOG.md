@@ -10,6 +10,7 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
   vanilla (1.21.6+).
 
 ### Changed
+- 1.21.11 is now tested before every release, alongside 1.20.1 and 1.21.1.
 - Fog Start Scale defaults to 1.00, so fog starts where vanilla's does.
 - Clouds and fog follow vanilla on each Minecraft version (curve, cylinder
   distance, render-distance fog, cloud fade).

@@ -8,7 +8,7 @@
 
 **Mode 13h: MS-DOSify!** is not just a generic “pixelation” shader. It aims to reproduce the actual visual limitations and quirks that gave old DOS-era 3D games their unmistakable look: low resolution, wobbly software texture mapping, a fixed 256-color palette, colormap lighting, billboarded sprites, and carefully tuned fog.
 
-It supports **Minecraft `1.20.1` and `1.21.1`** with **Iris** or **Oculus**; every release is tested on both. Newer versions are **best-effort**.
+It supports the long-term Minecraft versions **`1.20.1`, `1.21.1` and `1.21.11`** with **Iris** or **Oculus**; every release is tested on all three. **26.x** and other versions are **best-effort**.
 
 > **Recommended render resolution: `1280 x 800`**  
 > The shader pack is designed to **downscale by 4x** to an internal **`320 x 200`** image, matching classic **Mode 13h** output.  
@@ -84,7 +84,7 @@ You can adjust things such as:
 ## 🔧 Technical Notes
 
 - Requires **Iris** or **Oculus**. **OptiFine is not supported.**
-- Supported: **Minecraft `1.20.1` and `1.21.1`**. Newer versions are best-effort.
+- Supported: **Minecraft `1.20.1`, `1.21.1` and `1.21.11`**, tested before every release. **26.x** and other versions are best-effort.
 - Targets **OpenGL `4.1`**, so it can also run on **macOS**.
 - **Lightweight:** a handful of geometry passes and one final pass, no composites.
 - **Upgrading from 1.x:** settings for removed or renamed options reset to their defaults.
@@ -124,6 +124,35 @@ A bespoke skybox made specifically for **Mode 13h** may come in the future.
 - Not a clean or modernized take on retro visuals
 
 **Mode 13h** intentionally embraces visual instability, harsh quantization, and awkward old rendering tricks — because that is the whole point.
+
+## ❓ FAQ
+
+### Clouds don't show up on 1.21.1
+
+Sodium draws clouds with its own renderer, which Iris skips, so clouds are missing with **every** shader pack on 1.21.1. This is not a Mode 13h bug.
+
+To fix it, open your instance folder and add this line to `config/sodium-mixins.properties` (create the file if it doesn't exist), then restart the game:
+
+```properties
+mixin.features.render.world.clouds=false
+```
+
+Vanilla clouds then render through the shader.
+
+### How do I set the cloud distance? (1.21.6+)
+
+Clouds fade out at *Video Settings → Cloud Distance*. Shaders can't read that setting, so set *Shader options → Fog → Cloud Distance* to the same number of chunks. The default, `128`, is vanilla's default.
+
+Before 1.21.6, clouds fog at the render distance like terrain, and the option does nothing.
+
+### What is the Ramp palette, and how do the palettes differ?
+
+- **Ramp** (default): built for this pack. It has 16 Minecraft hues (gray, stone, dirt, wood, sand, grass, foliage, water, sky, red, lava, gold, amethyst, skin, diamond, crimson), each in 16 shades from black to near-white, like Quake's palette. Colormap lighting steps down these ramps, so it keeps Minecraft's colors best.
+- **VGA**: the stock palette a VGA card booted with. It has the 16 EGA colors, a gray ramp and a hue wheel, so it looks generic and saturated, as games did when they had no palette of their own.
+- **RGB332 / 6x6x6**: computed by splitting each channel evenly. They give a uniform color grid with visible banding and no hand-made ramps.
+- **Mac OS**: Apple's 1987 system palette, a `6 x 6 x 6` cube plus red, green, blue and gray ramps.
+- **Game palettes** (Wolf3D, Doom, Heretic, Hexen, Quake, Duke 3D, Daggerfall): the palette each game's 3D world used. Minecraft takes on that game's colors, but some blocks shift hue because those palettes have fewer Minecraft-like ramps.
+- **Off**: full color.
 
 ## 🖇️ Credits
 

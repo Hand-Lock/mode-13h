@@ -1,7 +1,7 @@
 # 0002. Platform: Iris/Oculus, GLSL 4.10 compatibility, 1.20.1 + 1.21.1
 
 Date: 2026-09-28
-Status: Accepted
+Status: Accepted (amended by ADR 0019)
 
 ## Context
 
