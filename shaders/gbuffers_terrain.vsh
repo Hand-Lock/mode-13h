@@ -130,6 +130,14 @@ void main() {
         pos.xz = faceCamera(fwd.xz, offset, pos.xz + mid.xz);
     }
 
+    // ---- Seagrass: four axis-aligned planes in a # ----
+    // Keep the south face of the z = 4 plane, billboarded on the block's center.
+    else if (id == 10962) {
+        if (gl_Normal.z < 0.5 || mid.z < 0.0) CULL
+        float offset = (uv.x - mc_midTexCoord.x) * float(atlasSize.x) / 16.0;
+        pos.xz = faceCamera(fwd.xz, offset, pos.xz + mid.xz);
+    }
+
     // ---- Bamboo stalk ----
     else if (id == 10964) {
         if (gl_Normal.z < 0.5 || gl_Normal.x < 0.0) CULL

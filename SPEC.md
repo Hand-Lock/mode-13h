@@ -61,11 +61,11 @@ real hardware did.
   are filtered for the 320×200 output instead of shimmering. ADR 0009.
 - **Fog.** Vanilla fog and cloud fog of the running Minecraft version (curve,
   cylinder distance, render-distance fog), scaled by `FOG_START_SCALE` and
-  `FOG_END_SCALE`; the default starts fog at half the vanilla distance.
+  `FOG_END_SCALE`; the defaults (1.00) match vanilla exactly.
   `CLOUD_DISTANCE` mirrors the video setting, which Iris doesn't pass.
   ADR 0016, ADR 0017.
 - **Billboards.** Cross plants, cave vines, hanging propagules, amethyst,
-  chains, torches, bamboo and lanterns are rewritten in the terrain vertex
+  chains, torches, bamboo, lanterns and seagrass are rewritten in the terrain vertex
   shader into single camera-facing quads. Signs and Billy Boarding blocks are
   opt-in.
 - **Hands.** Optional unlit "painted sprite" look (`HAND_FLATTEN`) and a 4×4

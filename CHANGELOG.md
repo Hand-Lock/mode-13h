@@ -10,6 +10,7 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
   vanilla (1.21.6+).
 
 ### Changed
+- Fog Start Scale defaults to 1.00, so fog starts where vanilla's does.
 - Clouds and fog follow vanilla on each Minecraft version (curve, cylinder
   distance, render-distance fog, cloud fade).
 
@@ -18,6 +19,7 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 - Clouds on 1.21.11 and 26.x were too transparent.
 - Stars and the sunset glow are never fogged, like vanilla.
 - The void below the horizon is fogged like vanilla on 1.21.6+.
+- Seagrass and tall seagrass were invisible.
 - Enchantment glint and lightning fade out with distance and glint ignores
   light, like vanilla.
 - Glowing eyes fade out with distance before 1.21.2, like vanilla.
