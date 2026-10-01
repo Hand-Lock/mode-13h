@@ -5,6 +5,8 @@ Versions: [SemVer](https://semver.org/) (see `docs/adr/0008-release-and-privacy.
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-10-01
+
 ### Added
 - Cloud Distance option: match your video setting so clouds fade out like
   vanilla (1.21.6+).
